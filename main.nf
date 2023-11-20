@@ -970,7 +970,7 @@ library(dplyr)
 library(stringi)
 
 
-df <-read.csv("!{readArray_makeDb_pass}", sep="\t")
+df <-read.delim("!{readArray_makeDb_pass}", sep="\t")
 
 df[["v_gene"]] <- getGene(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
 
@@ -2809,7 +2809,7 @@ library(dplyr)
 library(stringi)
 
 
-df <-read.csv("!{readArray_makeDb_pass}", sep="\t")
+df <-read.delim("!{readArray_makeDb_pass}", sep="\t")
 
 df[["v_gene"]] <- getGene(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
 
@@ -3935,7 +3935,7 @@ library(dplyr)
 library(stringi)
 
 
-df <-read.csv("!{readArray_makeDb_pass}", sep="\t")
+df <-read.delim("!{readArray_makeDb_pass}", sep="\t")
 
 df[["v_gene"]] <- getGene(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
 
