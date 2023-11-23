@@ -192,7 +192,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g_68}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -255,6 +255,7 @@ if(germlineFile.getName().endsWith("fasta")){
 process First_Alignment_V_MakeBlastDb {
 
 input:
+ set val(db_name), file(germlineFile) from g_2_germlineFastaFile_g0_22
 
 output:
  file "${db_name}"  into g0_22_germlineDb0_g0_9
@@ -327,6 +328,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g0_12
  set val(name_igblast),file(igblastOut) from g0_9_igblastOut0_g0_12
+ set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g0_12
  set val(name2), file(d_germline_file) from g_3_germlineFastaFile_g0_12
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g0_12
 
@@ -857,6 +859,7 @@ input:
  set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_30
  set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_30
  set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_30
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_30
 
 output:
  file "*.rmd"  into g0_30_rMarkdown0_g0_37
@@ -1014,6 +1017,7 @@ input:
  set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_38
  set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_38
  set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_38
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_38
 
 output:
  file "*.rmd"  into g0_38_rMarkdown0_g0_39
@@ -1262,6 +1266,7 @@ process First_Alignment_start_postion_report {
 
 input:
  set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_43
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g0_43
 
 output:
  file "*.rmd"  into g0_43_rMarkdown0_g0_44
@@ -1868,6 +1873,7 @@ if(germlineFile.getName().endsWith("fasta")){
 process Second_Alignment_V_MakeBlastDb {
 
 input:
+ set val(db_name), file(germlineFile) from g_2_germlineFastaFile_g11_22
 
 output:
  file "${db_name}"  into g11_22_germlineDb0_g11_9
@@ -1940,6 +1946,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g11_12
  set val(name_igblast),file(igblastOut) from g11_9_igblastOut0_g11_12
+ set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g11_12
  set val(name2), file(d_germline_file) from g_3_germlineFastaFile_g11_12
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g11_12
  set val(name3), file(j_germline_file) from g_8_germlineFastaFile1_g11_12
@@ -3059,6 +3066,7 @@ input:
  set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_30
  set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_30
  set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_30
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_30
 
 output:
  file "*.rmd"  into g11_30_rMarkdown0_g11_37
@@ -3215,6 +3223,7 @@ input:
  set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_38
  set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_38
  set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_38
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_38
 
 output:
  file "*.rmd"  into g11_38_rMarkdown0_g11_39
@@ -3373,6 +3382,7 @@ process Second_Alignment_start_postion_report {
 
 input:
  set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_43
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g11_43
 
 output:
  file "*.rmd"  into g11_43_rMarkdown0_g11_44
@@ -3975,6 +3985,7 @@ if(germlineFile.getName().endsWith("fasta")){
 process Third_Alignment_V_MakeBlastDb {
 
 input:
+ set val(db_name), file(germlineFile) from g_2_germlineFastaFile_g21_22
 
 output:
  file "${db_name}"  into g21_22_germlineDb0_g21_9
@@ -4047,6 +4058,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g21_12
  set val(name_igblast),file(igblastOut) from g21_9_igblastOut0_g21_12
+ set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g21_12
  set val(name2), file(d_germline_file) from g_30_germlineFastaFile1_g21_12
  set val(name3), file(j_germline_file) from g_31_germlineFastaFile1_g21_12
 
@@ -4418,6 +4430,7 @@ input:
  set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
  set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
  set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_30
 
 output:
  file "*.rmd"  into g21_30_rMarkdown0_g21_37
@@ -4574,6 +4587,7 @@ input:
  set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_38
  set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_38
  set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_38
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_38
 
 output:
  file "*.rmd"  into g21_38_rMarkdown0_g21_39
@@ -4732,6 +4746,7 @@ process Third_Alignment_start_postion_report {
 
 input:
  set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_43
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_43
 
 output:
  file "*.rmd"  into g21_43_rMarkdown0_g21_44
