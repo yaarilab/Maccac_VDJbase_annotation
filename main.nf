@@ -192,7 +192,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_46}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -547,13 +547,13 @@ if (class(novel) != 'try-error') {
 
 process First_Alignment_Collapse_AIRRseq {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "collapse_seq_output/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+failed.*$/) "collapse_seq_output/$filename"}
 input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52, g0_19_outputFileTSV0_g_68
- set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30
+ set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g_15, g0_19_outputFileTSV1_g_52, g0_19_outputFileTSV1_g_68
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
@@ -802,7 +802,7 @@ process ogrdbstats_report_first_alignment {
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_first_alignment/$filename"}
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_first_alignment/$filename"}
 input:
- set val(name),file(airrFile) from g0_19_outputFileTSV0_g_68
+ set val(name),file(airrFile) from g0_19_outputFileTSV1_g_68
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_68
  set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_68
 
@@ -1020,7 +1020,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_38
 
 output:
- file "*.rmd"  into g0_38_rMarkdown0_g0_39
+ file "*.rmd"  into g0_38_rMarkdown0_g0_46
 
 shell:
 
@@ -1155,13 +1155,13 @@ close OUT;
 
 process First_Alignment_render_mutation_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
 input:
- file rmk from g0_38_rMarkdown0_g0_39
+ file rmk from g0_38_rMarkdown0_g0_46
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_46
 
 output:
- file "*.html"  into g0_39_outputFileHTML00
- file "*csv" optional true  into g0_39_csvFile11
+ file "*.html"  into g0_46_outputFileHTML00
+ file "*csv" optional true  into g0_46_csvFile11
 
 """
 
@@ -1181,7 +1181,7 @@ process asc_allele_distribution {
 
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.pdf$/) "allele_distribution_report/$filename"}
 input:
- set val(name),file(airr_file) from g0_19_outputFileTSV0_g_52
+ set val(name),file(airr_file) from g0_19_outputFileTSV1_g_52
  set val(v_germline_name), file(v_germline_file) from g_2_germlineFastaFile_g_52
 
 output:
@@ -1369,6 +1369,36 @@ ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
             legend.title=element_text(size=50),
             legend.text =element_text(size=50))
 ```
+
+## V identity
+
+### all redas
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+### single asigmant 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df_filter, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+
 
 ## N count
 
@@ -1801,7 +1831,6 @@ close OUT;
 
 process First_Alignment_render_tables_postion_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
 input:
  file rmk from g0_41_rMarkdown0_g0_42
 
@@ -2012,8 +2041,8 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g_15
- set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30
+ set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g_15
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
@@ -2256,18 +2285,18 @@ if(airrFile.getName().endsWith(".tsv")){
 
 }
 
-g0_19_outputFileTSV0_g_15= g0_19_outputFileTSV0_g_15.ifEmpty([""]) 
+g0_19_outputFileTSV1_g_15= g0_19_outputFileTSV1_g_15.ifEmpty([""]) 
 g_2_germlineFastaFile_g_15= g_2_germlineFastaFile_g_15.ifEmpty([""]) 
-g11_19_outputFileTSV0_g_15= g11_19_outputFileTSV0_g_15.ifEmpty([""]) 
+g11_19_outputFileTSV1_g_15= g11_19_outputFileTSV1_g_15.ifEmpty([""]) 
 g_8_germlineFastaFile1_g_15= g_8_germlineFastaFile1_g_15.ifEmpty([""]) 
 
 
 process airr_seq_for_clone {
 
 input:
- set val("airrFile"), file(airrSeq) from g0_19_outputFileTSV0_g_15
+ set val("airrFile"), file(airrSeq) from g0_19_outputFileTSV1_g_15
  set val("v_germ"), file(v_germline_file) from g_2_germlineFastaFile_g_15
- set val("airrFileNovel"), file(airrSeqNovel) from g11_19_outputFileTSV0_g_15
+ set val("airrFileNovel"), file(airrSeqNovel) from g11_19_outputFileTSV1_g_15
  set val("v_novel"), file(v_novel_germline_file) from g_8_germlineFastaFile1_g_15
 
 output:
@@ -3226,7 +3255,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_38
 
 output:
- file "*.rmd"  into g11_38_rMarkdown0_g11_39
+ file "*.rmd"  into g11_38_rMarkdown0_g11_46
 
 shell:
 
@@ -3362,11 +3391,12 @@ close OUT;
 process Second_Alignment_render_mutation_report {
 
 input:
- file rmk from g11_38_rMarkdown0_g11_39
+ file rmk from g11_38_rMarkdown0_g11_46
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_46
 
 output:
- file "*.html"  into g11_39_outputFileHTML00
- file "*csv" optional true  into g11_39_csvFile11
+ file "*.html"  into g11_46_outputFileHTML00
+ file "*csv" optional true  into g11_46_csvFile11
 
 """
 
@@ -3485,6 +3515,36 @@ ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
             legend.title=element_text(size=50),
             legend.text =element_text(size=50))
 ```
+
+## V identity
+
+### all redas
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+### single asigmant 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df_filter, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+
 
 ## N count
 
@@ -4123,8 +4183,8 @@ input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g_37
- set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30
+ set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g_37
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
@@ -4373,7 +4433,7 @@ process ogrdbstats_report {
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdb_plots/$filename"}
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdb_report/$filename"}
 input:
- set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
+ set val(name),file(airrFile) from g21_19_outputFileTSV1_g_37
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
  set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_37
 
@@ -4590,7 +4650,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_38
 
 output:
- file "*.rmd"  into g21_38_rMarkdown0_g21_39
+ file "*.rmd"  into g21_38_rMarkdown0_g21_46
 
 shell:
 
@@ -4726,11 +4786,12 @@ close OUT;
 process Third_Alignment_render_mutation_report {
 
 input:
- file rmk from g21_38_rMarkdown0_g21_39
+ file rmk from g21_38_rMarkdown0_g21_46
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_46
 
 output:
- file "*.html"  into g21_39_outputFileHTML00
- file "*csv" optional true  into g21_39_csvFile11
+ file "*.html"  into g21_46_outputFileHTML00
+ file "*csv" optional true  into g21_46_csvFile11
 
 """
 
@@ -4849,6 +4910,36 @@ ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
             legend.title=element_text(size=50),
             legend.text =element_text(size=50))
 ```
+
+## V identity
+
+### all redas
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+### single asigmant 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df_filter, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+
 
 ## N count
 
