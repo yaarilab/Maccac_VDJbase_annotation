@@ -4430,8 +4430,8 @@ if(airrFile.getName().endsWith(".tsv")){
 
 process ogrdbstats_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdb_plots/$filename"}
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdb_report/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_thired_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_thired_alignment/$filename"}
 input:
  set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
