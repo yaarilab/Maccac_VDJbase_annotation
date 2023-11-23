@@ -192,7 +192,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_fastaFile_g21_12;g_2_fastaFile_g21_9;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_46}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_46}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -552,8 +552,8 @@ input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30
- set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g_15, g0_19_outputFileTSV1_g_52, g0_19_outputFileTSV1_g_68
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g_68, g0_19_outputFileTSV0_g_52, g0_19_outputFileTSV0_g_15
+ set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
@@ -802,7 +802,7 @@ process ogrdbstats_report_first_alignment {
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_first_alignment/$filename"}
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_first_alignment/$filename"}
 input:
- set val(name),file(airrFile) from g0_19_outputFileTSV1_g_68
+ set val(name),file(airrFile) from g0_19_outputFileTSV0_g_68
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_68
  set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_68
 
@@ -1181,11 +1181,11 @@ process asc_allele_distribution {
 
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.pdf$/) "allele_distribution_report/$filename"}
 input:
- set val(name),file(airr_file) from g0_19_outputFileTSV1_g_52
+ set val(name),file(airr_file) from g0_19_outputFileTSV0_g_52
  set val(v_germline_name), file(v_germline_file) from g_2_germlineFastaFile_g_52
 
 output:
- file "*.pdf"  into g_52_outputFilePdf00
+ file "*.pdf" optional true  into g_52_outputFilePdf00
 
 script:
 
@@ -2041,8 +2041,8 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30
- set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g_15
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g_15
+ set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
@@ -2285,18 +2285,18 @@ if(airrFile.getName().endsWith(".tsv")){
 
 }
 
-g0_19_outputFileTSV1_g_15= g0_19_outputFileTSV1_g_15.ifEmpty([""]) 
+g0_19_outputFileTSV0_g_15= g0_19_outputFileTSV0_g_15.ifEmpty([""]) 
 g_2_germlineFastaFile_g_15= g_2_germlineFastaFile_g_15.ifEmpty([""]) 
-g11_19_outputFileTSV1_g_15= g11_19_outputFileTSV1_g_15.ifEmpty([""]) 
+g11_19_outputFileTSV0_g_15= g11_19_outputFileTSV0_g_15.ifEmpty([""]) 
 g_8_germlineFastaFile1_g_15= g_8_germlineFastaFile1_g_15.ifEmpty([""]) 
 
 
 process airr_seq_for_clone {
 
 input:
- set val("airrFile"), file(airrSeq) from g0_19_outputFileTSV1_g_15
+ set val("airrFile"), file(airrSeq) from g0_19_outputFileTSV0_g_15
  set val("v_germ"), file(v_germline_file) from g_2_germlineFastaFile_g_15
- set val("airrFileNovel"), file(airrSeqNovel) from g11_19_outputFileTSV1_g_15
+ set val("airrFileNovel"), file(airrSeqNovel) from g11_19_outputFileTSV0_g_15
  set val("v_novel"), file(v_novel_germline_file) from g_8_germlineFastaFile1_g_15
 
 output:
@@ -4071,7 +4071,6 @@ process Third_Alignment_IgBlastn {
 
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g21_9
- set val(name),file(fastaFile) from g_2_germlineFastaFile_g21_9
  file db_v from g21_22_germlineDb0_g21_9
  file db_d from g21_16_germlineDb0_g21_9
  file db_j from g21_17_germlineDb0_g21_9
@@ -4115,10 +4114,8 @@ if(db_v.toString()!="" && db_d.toString()!="" && db_j.toString()!=""){
 
 process Third_Alignment_MakeDb {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*_db-pass.tsv$/) "genotyped_annotated_sequences/$filename"}
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g21_12
- set val(name),file(fastaFile) from g_2_germlineFastaFile_g21_12
  set val(name_igblast),file(igblastOut) from g21_9_igblastOut0_g21_12
  set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g21_12
  set val(name2), file(d_germline_file) from g_30_germlineFastaFile1_g21_12
@@ -4181,12 +4178,13 @@ if(igblastOut.getName().endsWith(".out")){
 
 process Third_Alignment_Collapse_AIRRseq {
 
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "genotyped_annotated_sequences/$filename"}
 input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30
- set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g_37
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g_37
+ set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
@@ -4435,7 +4433,7 @@ process ogrdbstats_report {
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdb_plots/$filename"}
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdb_report/$filename"}
 input:
- set val(name),file(airrFile) from g21_19_outputFileTSV1_g_37
+ set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
  set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_37
 
