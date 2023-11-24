@@ -1003,7 +1003,7 @@ input:
 
 output:
  file "*.html"  into g0_49_outputFileHTML00
- file "*csv"  into g0_49_csvFile11
+ file "*csv" optional true  into g0_49_csvFile11
 
 """
 #!/usr/bin/env Rscript 
@@ -1565,24 +1565,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df[,"junction"]))
-sequences_padded <- stri_pad_right(df[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
-
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("hist of N_count in each seq - without 0 N", "\n")
 x<-sum(df[,"count_N"]==0)
@@ -1618,22 +1600,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df_filter[,"junction"]))
-sequences_padded <- stri_pad_right(df_filter[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("Histogaram of N count in each sequence alignment  - without 0 N", "\n")
@@ -3270,7 +3236,7 @@ input:
 
 output:
  file "*.html"  into g11_49_outputFileHTML00
- file "*csv"  into g11_49_csvFile11
+ file "*csv" optional true  into g11_49_csvFile11
 
 """
 #!/usr/bin/env Rscript 
@@ -3741,24 +3707,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df[,"junction"]))
-sequences_padded <- stri_pad_right(df[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
-
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("hist of N_count in each seq - without 0 N", "\n")
 x<-sum(df[,"count_N"]==0)
@@ -3794,22 +3742,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df_filter[,"junction"]))
-sequences_padded <- stri_pad_right(df_filter[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("Histogaram of N count in each sequence alignment  - without 0 N", "\n")
@@ -4348,24 +4280,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df[,"junction"]))
-sequences_padded <- stri_pad_right(df[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
-
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("hist of N_count in each seq - without 0 N", "\n")
 x<-sum(df[,"count_N"]==0)
@@ -4401,22 +4315,6 @@ ggplot(data_df, aes(x = Position, y = Count)) +
 
 ```
 
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df_filter[,"junction"]))
-sequences_padded <- stri_pad_right(df_filter[,"junction"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in junction",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of junction")
-
-
-```
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 cat("Histogaram of N count in each sequence alignment  - without 0 N", "\n")
@@ -5044,7 +4942,7 @@ input:
 
 output:
  file "*.html"  into g21_49_outputFileHTML00
- file "*csv"  into g21_49_csvFile11
+ file "*csv" optional true  into g21_49_csvFile11
 
 """
 #!/usr/bin/env Rscript 
