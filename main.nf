@@ -192,7 +192,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_germlineFastaFile_g11_47;g_2_germlineFastaFile_g11_49}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_germlineFastaFile_g11_49;g_2_germlineFastaFile_g11_47;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_46;g_2_germlineFastaFile_g21_49;g_2_germlineFastaFile_g21_47}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -333,7 +333,7 @@ input:
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g0_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g_8
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g0_47, g0_12_outputFileTSV0_g_8
  set val("reference_set"), file("${reference_set}") optional true  into g0_12_germlineFastaFile1_g_37, g0_12_germlineFastaFile1_g_68
  set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_27, g0_12_outputFileTSV2_g0_38, g0_12_outputFileTSV2_g0_30, g0_12_outputFileTSV2_g0_49
 
@@ -1756,6 +1756,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  file rmk from g0_43_rMarkdown0_g0_47
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_47
+ set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_47
 
 output:
  file "*.html"  into g0_47_outputFileHTML00
@@ -1954,7 +1955,7 @@ input:
  set val(name3), file(j_germline_file) from g_8_germlineFastaFile1_g11_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49, g11_12_outputFileTSV0_g11_47
  set val("reference_set"), file("${reference_set}") optional true  into g11_12_germlineFastaFile11
  set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_27, g11_12_outputFileTSV2_g11_38, g11_12_outputFileTSV2_g11_30, g11_12_outputFileTSV2_g11_49
 
@@ -2975,7 +2976,7 @@ input:
 
 output:
  set val("${call}_genotype"),file("${call}_genotype_report.tsv")  into g_29_outputFileTSV00
- set val("${call}_personal_reference"), file("${call}_personal_reference.fasta")  into g_29_germlineFastaFile1_g21_22, g_29_germlineFastaFile1_g21_12, g_29_germlineFastaFile1_g21_43, g_29_germlineFastaFile1_g21_38, g_29_germlineFastaFile1_g21_30, g_29_germlineFastaFile1_g21_46, g_29_germlineFastaFile1_g21_47, g_29_germlineFastaFile1_g21_49
+ set val("${call}_personal_reference"), file("${call}_personal_reference.fasta")  into g_29_germlineFastaFile11
 
 script:
 
@@ -3057,31 +3058,6 @@ for (i in 1:nrow(geno)) {
 writeFasta(germline_db_new, file = paste0("${call}","_personal_reference.fasta"))
 
 """
-
-}
-
-
-process Third_Alignment_V_MakeBlastDb {
-
-input:
- set val(db_name), file(germlineFile) from g_29_germlineFastaFile1_g21_22
-
-output:
- file "${db_name}"  into g21_22_germlineDb0_g21_9
-
-script:
-
-if(germlineFile.getName().endsWith("fasta")){
-	"""
-	sed -e '/^>/! s/[.]//g' ${germlineFile} > tmp_germline.fasta
-	mkdir -m777 ${db_name}
-	makeblastdb -parse_seqids -dbtype nucl -in tmp_germline.fasta -out ${db_name}/${db_name}
-	"""
-}else{
-	"""
-	echo something if off
-	"""
-}
 
 }
 
@@ -3897,6 +3873,7 @@ process Second_Alignment_render_start_postion_report {
 input:
  file rmk from g11_43_rMarkdown0_g11_47
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_47
+ set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_47
 
 output:
  file "*.html"  into g11_47_outputFileHTML00
@@ -4012,6 +3989,31 @@ if(germlineFile.getName().endsWith("fasta")){
 }
 
 
+process Third_Alignment_V_MakeBlastDb {
+
+input:
+ set val(db_name), file(germlineFile) from g_2_germlineFastaFile_g21_22
+
+output:
+ file "${db_name}"  into g21_22_germlineDb0_g21_9
+
+script:
+
+if(germlineFile.getName().endsWith("fasta")){
+	"""
+	sed -e '/^>/! s/[.]//g' ${germlineFile} > tmp_germline.fasta
+	mkdir -m777 ${db_name}
+	makeblastdb -parse_seqids -dbtype nucl -in tmp_germline.fasta -out ${db_name}/${db_name}
+	"""
+}else{
+	"""
+	echo something if off
+	"""
+}
+
+}
+
+
 process Third_Alignment_IgBlastn {
 
 input:
@@ -4062,12 +4064,12 @@ process Third_Alignment_MakeDb {
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g21_12
  set val(name_igblast),file(igblastOut) from g21_9_igblastOut0_g21_12
- set val(name1), file(v_germline_file) from g_29_germlineFastaFile1_g21_12
+ set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g21_12
  set val(name2), file(d_germline_file) from g_30_germlineFastaFile1_g21_12
  set val(name3), file(j_germline_file) from g_31_germlineFastaFile1_g21_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49, g21_12_outputFileTSV0_g21_47
  set val("reference_set"), file("${reference_set}") optional true  into g21_12_germlineFastaFile11
  set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_27, g21_12_outputFileTSV2_g21_38, g21_12_outputFileTSV2_g21_30, g21_12_outputFileTSV2_g21_49
 
@@ -4121,11 +4123,780 @@ if(igblastOut.getName().endsWith(".out")){
 }
 
 
+process Third_Alignment_Collapse_AIRRseq {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "genotyped_annotated_sequences/$filename"}
+input:
+ set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
+
+output:
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_48, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g_37
+ set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_48, g21_19_outputFileTSV1_g21_49
+
+script:
+conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
+n_max = params.Third_Alignment_Collapse_AIRRseq.n_max
+
+outfile = airrFile.toString() - '.tsv' +"_collapsed-"
+
+if(airrFile.getName().endsWith(".tsv")){	
+	"""
+	#!/usr/bin/env python3
+	
+	from pprint import pprint
+	from collections import OrderedDict,Counter
+	import itertools as it
+	import datetime
+	import pandas as pd
+	import glob, os
+	import numpy as np
+	import re
+	
+	# column types default
+	
+	# dtype_default={'junction_length': 'Int64', 'np1_length': 'Int64', 'np2_length': 'Int64', 'v_sequence_start': 'Int64', 'v_sequence_end': 'Int64', 'v_germline_start': 'Int64', 'v_germline_end': 'Int64', 'd_sequence_start': 'Int64', 'd_sequence_end': 'Int64', 'd_germline_start': 'Int64', 'd_germline_end': 'Int64', 'j_sequence_start': 'Int64', 'j_sequence_end': 'Int64', 'j_germline_start': 'Int64', 'j_germline_end': 'Int64', 'v_score': 'Int64', 'v_identity': 'Int64', 'v_support': 'Int64', 'd_score': 'Int64', 'd_identity': 'Int64', 'd_support': 'Int64', 'j_score': 'Int64', 'j_identity': 'Int64', 'j_support': 'Int64'}
+	
+	SPLITSIZE=2
+	
+	class CollapseDict:
+	    def __init__(self,iterable=(),_depth=0,
+	                 nlim=10,conscount_flag=False):
+	        self.lowqual={}
+	        self.seqs = {}
+	        self.children = {}
+	        self.depth=_depth
+	        self.nlim=nlim
+	        self.conscount=conscount_flag
+	        for fseq in iterable:
+	            self.add(fseq)
+	
+	    def split(self):
+	        newseqs = {}
+	        for seq in self.seqs:
+	            if len(seq)==self.depth:
+	                newseqs[seq]=self.seqs[seq]
+	            else:
+	                if seq[self.depth] not in self.children:
+	                    self.children[seq[self.depth]] = CollapseDict(_depth=self.depth+1)
+	                self.children[seq[self.depth]].add(self.seqs[seq],seq)
+	        self.seqs=newseqs
+	
+	    def add(self,fseq,key=None):
+	        #if 'duplicate_count' not in fseq: fseq['duplicate_count']='1'
+	        if 'KEY' not in fseq:
+	            fseq['KEY']=fseq['sequence_vdj'].replace('-','').replace('.','')
+	        if 'ISOTYPECOUNTER' not in fseq:
+	            fseq['ISOTYPECOUNTER']=Counter([fseq['c_call']])
+	        if 'VGENECOUNTER' not in fseq:
+	            fseq['VGENECOUNTER']=Counter([fseq['v_call']])
+	        if 'JGENECOUNTER' not in fseq:
+	            fseq['JGENECOUNTER']=Counter([fseq['j_call']])
+	        if key is None:
+	            key=fseq['KEY']
+	        if self.depth==0:
+	            if (not fseq['j_call'] or not fseq['v_call']):
+	                return
+	            if fseq['sequence_vdj'].count('N')>self.nlim:
+	                if key in self.lowqual:
+	                    self.lowqual[key] = combine(self.lowqual[key],fseq,self.conscount)
+	                else:
+	                    self.lowqual[key] = fseq
+	                return
+	        if len(self.seqs)>SPLITSIZE:
+	            self.split()
+	        if key in self.seqs:
+	            self.seqs[key] = combine(self.seqs[key],fseq,self.conscount)
+	        elif (self.children is not None and
+	              len(key)>self.depth and
+	              key[self.depth] in self.children):
+	            self.children[key[self.depth]].add(fseq,key)
+	        else:
+	            self.seqs[key] = fseq
+	
+	    def __iter__(self):
+	        yield from self.seqs.items()
+	        for d in self.children.values():
+	            yield from d
+	        yield from self.lowqual.items()
+	
+	    def neighbors(self,seq):
+	        def nfil(x): return similar(seq,x)
+	        yield from filter(nfil,self.seqs)
+	        if len(seq)>self.depth:
+	            for d in [self.children[c]
+	                      for c in self.children
+	                      if c=='N' or seq[self.depth]=='N' or c==seq[self.depth]]:
+	                yield from d.neighbors(seq)
+	
+	    def fixedseqs(self):
+	        return self
+	        ncd = CollapseDict()
+	        for seq,fseq in self:
+	            newseq=seq
+	            if 'N' in seq:
+	                newseq=consensus(seq,self.neighbors(seq))
+	                fseq['KEY']=newseq
+	            ncd.add(fseq,newseq)
+	        return ncd
+	
+	
+	    def __len__(self):
+	        return len(self.seqs)+sum(len(c) for c in self.children.values())+len(self.lowqual)
+	
+	def combine(f1,f2, conscount_flag):
+	    def val(f): return -f['KEY'].count('N'),(int(f['consensus_count']) if 'consensus_count' in f else 0)
+	    targ = (f1 if val(f1) >= val(f2) else f2).copy()
+	    if conscount_flag:
+	        targ['consensus_count'] =  int(f1['consensus_count'])+int(f2['consensus_count'])
+	    targ['duplicate_count'] =  int(f1['duplicate_count'])+int(f2['duplicate_count'])
+	    targ['ISOTYPECOUNTER'] = f1['ISOTYPECOUNTER']+f2['ISOTYPECOUNTER']
+	    targ['VGENECOUNTER'] = f1['VGENECOUNTER']+f2['VGENECOUNTER']
+	    targ['JGENECOUNTER'] = f1['JGENECOUNTER']+f2['JGENECOUNTER']
+	    return targ
+	
+	def similar(s1,s2):
+	    return len(s1)==len(s2) and all((n1==n2 or n1=='N' or n2=='N')
+	                                  for n1,n2 in zip(s1,s2))
+	
+	def basecon(bases):
+	    bases.discard('N')
+	    if len(bases)==1: return bases.pop()
+	    else: return 'N'
+	
+	def consensus(seq,A):
+	    return ''.join((basecon(set(B)) if s=='N' else s) for (s,B) in zip(seq,zip(*A)))
+	
+	n_lim = int('${n_max}')
+	conscount_filter = int('${conscount_min}')
+	
+	df = pd.read_csv('${airrFile}', sep = '\t') #, dtype = dtype_default)
+	
+	# make sure that all columns are int64 for createGermline
+	
+	cols =  [col for col in df.select_dtypes('float64').columns.values.tolist() if not re.search('support|score|identity', col)]
+	df[cols] = df[cols].apply(lambda x: pd.to_numeric(x.replace("<NA>",np.NaN), errors = "coerce").astype("Int64"))
+	
+	conscount_flag = False
+	if 'consensus_count' in df: conscount_flag = True
+	if not 'duplicate_count' in df:
+	    df['duplicate_count'] = 1
+	if not 'c_call' in df or not 'isotype' in df or not 'prcons' in df or not 'primer' in df or not 'reverse_primer' in df:
+	    if 'c_call' in df:
+	        df['c_call'] = df['c_call']
+	    elif 'isotype' in df:
+	        df['c_call'] = df['isotype']
+	    elif 'primer' in df:
+	        df['c_call'] = df['primer']
+	    elif 'reverse_primer' in df:
+	        df['c_call'] = df['reverse_primer']    
+	    elif 'prcons' in df:
+	        df['c_call'] = df['prcons']
+	    elif 'barcode' in df:
+	        df['c_call'] = df['barcode']
+	    else:
+	        df['c_call'] = 'Ig'
+	
+	# removing sequenes with duplicated sequence id    
+	dup_n = df[df.columns[0]].count()
+	df = df.drop_duplicates(subset='sequence_id', keep='first')
+	dup_n = str(dup_n - df[df.columns[0]].count())
+	
+	df['c_call'].fillna('Ig', inplace=True)
+	#df['consensus_count'].fillna(2, inplace=True)
+	nrow_i = df[df.columns[0]].count()
+	df = df[df.apply(lambda x: x['sequence_alignment'][0:(x['v_germline_end']-1)].count('N')<=n_lim, axis = 1)]
+	low_n = str(nrow_i-df[df.columns[0]].count())
+	
+	df['sequence_vdj'] = df.apply(lambda x: x['sequence_alignment'].replace('-','').replace('.',''), axis = 1)
+	header=list(df.columns)
+	fasta_ = df.to_dict(orient='records')
+	c = CollapseDict(fasta_,nlim=10)
+	d=c.fixedseqs()
+	header.append('ISOTYPECOUNTER')
+	header.append('VGENECOUNTER')
+	header.append('JGENECOUNTER')
+	
+	rec_list = []
+	for i, f in enumerate(d):
+	    rec=f[1]
+	    rec['sequence']=rec['KEY']
+	    rec['consensus_count']=int(rec['consensus_count']) if conscount_flag else None
+	    rec['duplicate_count']=int(rec['duplicate_count'])
+	    rec_list.append(rec)
+	df2 = pd.DataFrame(rec_list, columns = header)        
+	
+	collapse_n = str(df[df.columns[0]].count()-df2[df2.columns[0]].count())
+	
+	# removing sequences without J assignment and non functional
+	nrow_i = df2[df2.columns[0]].count()
+	cond = (~df2['j_call'].str.contains('J')|df2['productive'].isin(['F','FALSE','False']))
+	df_non = df2[cond]
+	
+	
+	df2 = df2[df2['productive'].isin(['T','TRUE','True'])]
+	cond = ~(df2['j_call'].str.contains('J'))
+	df2 = df2.drop(df2[cond].index.values)
+	
+	non_n = nrow_i-df2[df2.columns[0]].count()
+	#if conscount_flag:
+	#   df2['consensus_count'] = df2['consensus_count'].replace(1,2)
+	
+	# removing sequences with low cons count
+	
+	filter_column = "duplicate_count"
+	if conscount_flag: filter_column = "consensus_count"
+	df_cons_low = df2[df2[filter_column]<conscount_filter]
+	nrow_i = df2[df2.columns[0]].count()
+	df2 = df2[df2[filter_column]>=conscount_filter]
+	
+	
+	cons_n = str(nrow_i-df2[df2.columns[0]].count())
+	nrow_i = df2[df2.columns[0]].count()    
+	
+	df2.to_csv('${outfile}'+'passed.tsv', sep = '\t',index=False)
+	
+	df_cons_low.to_csv('${outfile}'+'failed_conscount.tsv', sep = '\t',index=False)
+	df_non.to_csv('${outfile}'+'failed_functional.tsv', sep = '\t',index=False)
+	
+	print(str(low_n)+' Sequences had N count over 10')
+	print(str(dup_n)+' Sequences had a duplicated sequnece id')
+	print(str(collapse_n)+' Sequences were collapsed')
+	print(str(df_non[df_non.columns[0]].count())+' Sequences were declared non functional or lacked a J assignment')
+	#print(str(df_cons_low[df_cons_low.columns[0]].count())+' Sequences had a '+filter_column+' lower than threshold')
+	print('Going forward with '+str(df2[df2.columns[0]].count())+' sequences')
+	
+	"""
+}else{
+	"""
+	
+	"""
+}
+
+}
+
+
+process ogrdbstats_report {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_thired_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_thired_alignment/$filename"}
+input:
+ set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
+ set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
+ set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_37
+
+output:
+ file "*pdf"  into g_37_outputFilePdf00
+ file "*csv"  into g_37_outputFileCSV11
+
+script:
+
+// general params
+chain = params.ogrdbstats_report.chain
+outname = airrFile.name.toString().substring(0, airrFile.name.toString().indexOf("_db-pass"))
+
+"""
+
+novel=""
+
+if grep -q "_[A-Z][0-9]" ${v_germline_file}; then
+	grep -A 6 "_[A-Z][0-9]" ${v_germline_file} > novel_sequences.fasta
+	novel=\$(realpath novel_sequences.fasta)
+	novel="--inf_file \$novel"
+fi
+
+IFS='\t' read -a var < ${airrFile}
+
+airrfile=${airrFile}
+
+if [[ ! "\${var[*]}" =~ "v_call_genotyped" ]]; then
+    awk -F'\t' '{col=\$5;gsub("call", "call_genotyped", col); print \$0 "\t" col}' ${airrFile} > ${outname}_genotyped.tsv
+    airrfile=${outname}_genotyped.tsv
+fi
+
+germline_file_path=\$(realpath ${germline_file})
+
+airrFile_path=\$(realpath \$airrfile)
+
+
+run_ogrdbstats \
+	\$germline_file_path \
+	"Homosapiens" \
+	\$airrFile_path \
+	${chain} \
+	\$novel 
+
+"""
+
+}
+
+
+process Third_Alignment_alignment_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_30
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_30
+
+output:
+ file "*.rmd"  into g21_30_rMarkdown0_g21_49
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
+readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
+readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
+readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
+readArray_v_ref = v_ref.toString().split(' ')[0]
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(Biostrings)
+
+
+makeDb_pass<-read.csv("!{readArray_makeDb_pass}", sep="\t")
+makeDb_fail<-read.csv("!{readArray_makeDb_fail}", sep="\t")
+collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
+collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
+
+threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
+
+threshold_collapse <- max(collapse_fail[[threshold_column]])
+
+
+collapse_db <- rbind(collapse_pass, collapse_fail)
+
+```
+
+
+### Plot duplicated column after collapse
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
+geom_histogram(bins = 100) +
+geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
+
+print(p1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(v_gene, p_single, p_multiple) %>%
+			reshape2::melt() %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
+
+print(plot1)
+
+```
+
+
+### Number of multiple assignment per gene (IMGT / ASC) collapse pass
+
+```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
+
+plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
+			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
+			group_by(collapse_status, v_gene) %>%
+			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
+					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
+			select(collapse_status, v_gene, p_single, p_multiple) %>%
+			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
+			ggplot(mapping = aes(v_gene, value, fill = variable)) +
+			geom_col() +
+			theme_bw() +
+			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+			facet_grid(.~collapse_status)
+
+print(plot2)
+
+```
+
+
+### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
+
+```{r echo=FALSE,message = FALSE,fig.width=35,fig.height=50}
+plot3 <- collapse_db %>%
+  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
+  group_by(v_gene) %>%
+  mutate(n_read = n()) %>%
+  group_by(v_gene, v_call) %>%
+  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
+  arrange(v_gene, desc(p_calls)) %>%
+  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
+  geom_col() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
+  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
+
+print(plot3)
+
+```
+
+
+EOF
+	
+open OUT, ">alignment_report_!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_alignment_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_49
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_49
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_49
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_49
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_49
+ file rmk from g21_30_rMarkdown0_g21_49
+
+output:
+ file "*.html"  into g21_49_outputFileHTML00
+ file "*csv" optional true  into g21_49_csvFile11
+
+"""
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+"""
+}
+
+
+process Third_Alignment_mutation_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_38
+ set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_38
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_38
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_38
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_38
+
+output:
+ file "*.rmd"  into g21_38_rMarkdown0_g21_46
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
+readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
+readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
+readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
+readArray_v_ref = v_ref.toString().split(' ')[0]
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(Biostrings)
+
+
+collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
+collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
+
+v_ref<-readDNAStringSet("!{v_ref}")
+v_ref<-as.character(v_ref)
+
+threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
+
+threshold_collapse <- max(collapse_fail[[threshold_column]])
+
+
+collapse_db <- rbind(collapse_pass, collapse_fail)
+
+```
+
+```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
+library(reshape2)
+
+filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
+
+unique_v_calls <- unique(filtered_data[,"v_call"])
+
+# Define a function to perform the comparison and generate plots
+process_v_call <- function(v_call_value) {
+
+  seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
+  ref_seq <- v_ref[v_call_value]
+  comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
+  for (i in 1:length(seq_list)) {
+    cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
+    for (j in 1:nchar(ref_seq)) {
+      if(substr(cut_seq, j, j) == "."){
+      	comparison_matrix[i, j] <- 2
+      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
+        comparison_matrix[i, j] <- 0
+      } else {
+        comparison_matrix[i, j] <- 1
+      }
+    }
+  }
+  
+  proportion_of_ones <- colMeans(comparison_matrix == 1)
+  entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
+  entropy_vector[is.nan(entropy_vector)] <- 0
+  max_index <- which.max(entropy_vector)
+  max_value <- entropy_vector[max_index]
+  data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
+
+   
+  entropy_plot<-ggplot(data, aes(x = position, y = value)) +
+  geom_line() +
+  labs(x = "Position",y = "entropy")+
+  theme_minimal()+
+  scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
+  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
+
+
+  data_melt <- melt(comparison_matrix)
+
+  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
+                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
+
+  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
+
+  heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
+    geom_tile() +
+    scale_fill_manual(values =  c("white", "blue","red")) +
+    labs(x = "Position", y = "Sequence") +
+    theme_minimal() +
+    theme(legend.position = "none") +  
+    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
+    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
+    
+  blue_counts <- colSums(comparison_matrix == 1)
+  blue_counts_df <- data.frame(Position = 1:length(blue_counts), Count = blue_counts)
+
+  histogram_plot <- ggplot(blue_counts_df, aes(x = Position, y = Count)) +
+    geom_bar(stat = "identity", fill = "blue") +
+    labs(x = "Position", y = "Mismatch Count") +
+    theme_minimal() +
+    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
+    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
+
+  library(gridExtra)
+  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
+  invisible(combined_plot)
+}
+
+
+
+for (v_call_value in unique_v_calls) {
+  cat(v_call_value)
+  process_v_call(v_call_value)
+}
+
+```
+
+EOF
+	
+open OUT, ">!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_mutation_report {
+
+input:
+ file rmk from g21_38_rMarkdown0_g21_46
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_46
+
+output:
+ file "*.html"  into g21_46_outputFileHTML00
+ file "*csv" optional true  into g21_46_csvFile11
+
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
+process Third_Alignment_tables_postion_report {
+
+input:
+ set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_41
+ set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_41
+
+output:
+ file "*.rmd"  into g21_41_rMarkdown0_g21_48
+
+shell:
+
+
+readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
+readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
+
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+install.packages("vegan")
+library(seqinr)
+library(vegan)
+library(dplyr)
+library(ggplot2)
+library(alakazam)
+library(knitr)
+
+
+
+collapse_pass<-read.delim("!{readArray_collapse_pass}", sep="\t")
+collapse_fail<-read.delim("!{readArray_collapse_fail}", sep="\t")
+
+datadf <- rbind(collapse_pass, collapse_fail)
+datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
+
+```
+
+```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
+positionInfo <- function(data, v_gene, verbose=TRUE){
+    info <- list()
+    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
+    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
+        ss <- substr(data[,"sequence_alignment"],i,i)
+        ss <- toupper(ss)
+        df <- data.frame(base=unique(ss))
+        tmp <- c()
+        for ( j in 1:length(unique(ss))){
+            tmp[j] <- length(grep(df[j,1], ss))
+        }
+        df[,"rep"] <- tmp
+        rownames(df) <- as.character(df[,1])
+        df[,1] <- NULL
+        dff <- subset(df, rownames(df)!="-")
+        
+        info[[i]] <- list(
+            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
+            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
+            rich = length(unique(ss)),                                  # Position richness
+            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
+            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
+            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
+        )
+        if(verbose){
+            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
+        }
+    }
+
+    if(verbose){cat("Creating the data frame with the information \n")}
+
+    df <- data.frame(v_gene = v_gene,
+                     posi=c(1:length(info)),
+                     shan=sapply(info, `[[`, "shan"),
+                     shanc=sapply(info, `[[`, "shanc"),
+                     rich=sapply(info, `[[`, "rich"),
+                     richc=sapply(info, `[[`, "richc"),
+                     uniq=sapply(info, `[[`, "uniq"),
+                     repe=sapply(info, `[[`, "repe"))
+    
+    if(verbose){cat("Finished \n")}
+    return(df)
+}
+
+```
+
+
+```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
+replace_dots <- function(x) {
+  chartr(".", "-", x)
+}
+df <- data.frame(lapply(datadf, replace_dots))
+
+filtered_data <- df %>% filter(!grepl(",", v_call))
+
+info <- lapply(unique(filtered_data[,"v_call"]), function(g){
+ cat("\n\n", "*************************", "\n")
+ x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
+ print(knitr::kable(x))
+ cat("\n\n", "*************************", "\n")
+})
+
+```
+
+EOF
+	
+open OUT, ">tables_postion_report_!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_tables_postion_report {
+
+input:
+ file rmk from g21_41_rMarkdown0_g21_48
+ set val(name1), file(collaps_pass) from g21_19_outputFileTSV0_g21_48
+ set val(name1), file(collaps_fail) from g21_19_outputFileTSV1_g21_48
+
+output:
+ file "*.html"  into g21_48_outputFileHTML00
+ file "*csv" optional true  into g21_48_csvFile11
+
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
 process Third_Alignment_start_postion_report {
 
 input:
  set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_43
- set val(name2), file(v_ref) from g_29_germlineFastaFile1_g21_43
+ set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_43
 
 output:
  file "*.rmd"  into g21_43_rMarkdown0_g21_47
@@ -4469,780 +5240,12 @@ process Third_Alignment_render_start_postion_report {
 
 input:
  file rmk from g21_43_rMarkdown0_g21_47
- set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_47
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_47
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_47
 
 output:
  file "*.html"  into g21_47_outputFileHTML00
  file "*csv" optional true  into g21_47_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
-"""
-}
-
-
-process Third_Alignment_Collapse_AIRRseq {
-
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "genotyped_annotated_sequences/$filename"}
-input:
- set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
-
-output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_48, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g_37
- set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_48, g21_19_outputFileTSV1_g21_49
-
-script:
-conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
-n_max = params.Third_Alignment_Collapse_AIRRseq.n_max
-
-outfile = airrFile.toString() - '.tsv' +"_collapsed-"
-
-if(airrFile.getName().endsWith(".tsv")){	
-	"""
-	#!/usr/bin/env python3
-	
-	from pprint import pprint
-	from collections import OrderedDict,Counter
-	import itertools as it
-	import datetime
-	import pandas as pd
-	import glob, os
-	import numpy as np
-	import re
-	
-	# column types default
-	
-	# dtype_default={'junction_length': 'Int64', 'np1_length': 'Int64', 'np2_length': 'Int64', 'v_sequence_start': 'Int64', 'v_sequence_end': 'Int64', 'v_germline_start': 'Int64', 'v_germline_end': 'Int64', 'd_sequence_start': 'Int64', 'd_sequence_end': 'Int64', 'd_germline_start': 'Int64', 'd_germline_end': 'Int64', 'j_sequence_start': 'Int64', 'j_sequence_end': 'Int64', 'j_germline_start': 'Int64', 'j_germline_end': 'Int64', 'v_score': 'Int64', 'v_identity': 'Int64', 'v_support': 'Int64', 'd_score': 'Int64', 'd_identity': 'Int64', 'd_support': 'Int64', 'j_score': 'Int64', 'j_identity': 'Int64', 'j_support': 'Int64'}
-	
-	SPLITSIZE=2
-	
-	class CollapseDict:
-	    def __init__(self,iterable=(),_depth=0,
-	                 nlim=10,conscount_flag=False):
-	        self.lowqual={}
-	        self.seqs = {}
-	        self.children = {}
-	        self.depth=_depth
-	        self.nlim=nlim
-	        self.conscount=conscount_flag
-	        for fseq in iterable:
-	            self.add(fseq)
-	
-	    def split(self):
-	        newseqs = {}
-	        for seq in self.seqs:
-	            if len(seq)==self.depth:
-	                newseqs[seq]=self.seqs[seq]
-	            else:
-	                if seq[self.depth] not in self.children:
-	                    self.children[seq[self.depth]] = CollapseDict(_depth=self.depth+1)
-	                self.children[seq[self.depth]].add(self.seqs[seq],seq)
-	        self.seqs=newseqs
-	
-	    def add(self,fseq,key=None):
-	        #if 'duplicate_count' not in fseq: fseq['duplicate_count']='1'
-	        if 'KEY' not in fseq:
-	            fseq['KEY']=fseq['sequence_vdj'].replace('-','').replace('.','')
-	        if 'ISOTYPECOUNTER' not in fseq:
-	            fseq['ISOTYPECOUNTER']=Counter([fseq['c_call']])
-	        if 'VGENECOUNTER' not in fseq:
-	            fseq['VGENECOUNTER']=Counter([fseq['v_call']])
-	        if 'JGENECOUNTER' not in fseq:
-	            fseq['JGENECOUNTER']=Counter([fseq['j_call']])
-	        if key is None:
-	            key=fseq['KEY']
-	        if self.depth==0:
-	            if (not fseq['j_call'] or not fseq['v_call']):
-	                return
-	            if fseq['sequence_vdj'].count('N')>self.nlim:
-	                if key in self.lowqual:
-	                    self.lowqual[key] = combine(self.lowqual[key],fseq,self.conscount)
-	                else:
-	                    self.lowqual[key] = fseq
-	                return
-	        if len(self.seqs)>SPLITSIZE:
-	            self.split()
-	        if key in self.seqs:
-	            self.seqs[key] = combine(self.seqs[key],fseq,self.conscount)
-	        elif (self.children is not None and
-	              len(key)>self.depth and
-	              key[self.depth] in self.children):
-	            self.children[key[self.depth]].add(fseq,key)
-	        else:
-	            self.seqs[key] = fseq
-	
-	    def __iter__(self):
-	        yield from self.seqs.items()
-	        for d in self.children.values():
-	            yield from d
-	        yield from self.lowqual.items()
-	
-	    def neighbors(self,seq):
-	        def nfil(x): return similar(seq,x)
-	        yield from filter(nfil,self.seqs)
-	        if len(seq)>self.depth:
-	            for d in [self.children[c]
-	                      for c in self.children
-	                      if c=='N' or seq[self.depth]=='N' or c==seq[self.depth]]:
-	                yield from d.neighbors(seq)
-	
-	    def fixedseqs(self):
-	        return self
-	        ncd = CollapseDict()
-	        for seq,fseq in self:
-	            newseq=seq
-	            if 'N' in seq:
-	                newseq=consensus(seq,self.neighbors(seq))
-	                fseq['KEY']=newseq
-	            ncd.add(fseq,newseq)
-	        return ncd
-	
-	
-	    def __len__(self):
-	        return len(self.seqs)+sum(len(c) for c in self.children.values())+len(self.lowqual)
-	
-	def combine(f1,f2, conscount_flag):
-	    def val(f): return -f['KEY'].count('N'),(int(f['consensus_count']) if 'consensus_count' in f else 0)
-	    targ = (f1 if val(f1) >= val(f2) else f2).copy()
-	    if conscount_flag:
-	        targ['consensus_count'] =  int(f1['consensus_count'])+int(f2['consensus_count'])
-	    targ['duplicate_count'] =  int(f1['duplicate_count'])+int(f2['duplicate_count'])
-	    targ['ISOTYPECOUNTER'] = f1['ISOTYPECOUNTER']+f2['ISOTYPECOUNTER']
-	    targ['VGENECOUNTER'] = f1['VGENECOUNTER']+f2['VGENECOUNTER']
-	    targ['JGENECOUNTER'] = f1['JGENECOUNTER']+f2['JGENECOUNTER']
-	    return targ
-	
-	def similar(s1,s2):
-	    return len(s1)==len(s2) and all((n1==n2 or n1=='N' or n2=='N')
-	                                  for n1,n2 in zip(s1,s2))
-	
-	def basecon(bases):
-	    bases.discard('N')
-	    if len(bases)==1: return bases.pop()
-	    else: return 'N'
-	
-	def consensus(seq,A):
-	    return ''.join((basecon(set(B)) if s=='N' else s) for (s,B) in zip(seq,zip(*A)))
-	
-	n_lim = int('${n_max}')
-	conscount_filter = int('${conscount_min}')
-	
-	df = pd.read_csv('${airrFile}', sep = '\t') #, dtype = dtype_default)
-	
-	# make sure that all columns are int64 for createGermline
-	
-	cols =  [col for col in df.select_dtypes('float64').columns.values.tolist() if not re.search('support|score|identity', col)]
-	df[cols] = df[cols].apply(lambda x: pd.to_numeric(x.replace("<NA>",np.NaN), errors = "coerce").astype("Int64"))
-	
-	conscount_flag = False
-	if 'consensus_count' in df: conscount_flag = True
-	if not 'duplicate_count' in df:
-	    df['duplicate_count'] = 1
-	if not 'c_call' in df or not 'isotype' in df or not 'prcons' in df or not 'primer' in df or not 'reverse_primer' in df:
-	    if 'c_call' in df:
-	        df['c_call'] = df['c_call']
-	    elif 'isotype' in df:
-	        df['c_call'] = df['isotype']
-	    elif 'primer' in df:
-	        df['c_call'] = df['primer']
-	    elif 'reverse_primer' in df:
-	        df['c_call'] = df['reverse_primer']    
-	    elif 'prcons' in df:
-	        df['c_call'] = df['prcons']
-	    elif 'barcode' in df:
-	        df['c_call'] = df['barcode']
-	    else:
-	        df['c_call'] = 'Ig'
-	
-	# removing sequenes with duplicated sequence id    
-	dup_n = df[df.columns[0]].count()
-	df = df.drop_duplicates(subset='sequence_id', keep='first')
-	dup_n = str(dup_n - df[df.columns[0]].count())
-	
-	df['c_call'].fillna('Ig', inplace=True)
-	#df['consensus_count'].fillna(2, inplace=True)
-	nrow_i = df[df.columns[0]].count()
-	df = df[df.apply(lambda x: x['sequence_alignment'][0:(x['v_germline_end']-1)].count('N')<=n_lim, axis = 1)]
-	low_n = str(nrow_i-df[df.columns[0]].count())
-	
-	df['sequence_vdj'] = df.apply(lambda x: x['sequence_alignment'].replace('-','').replace('.',''), axis = 1)
-	header=list(df.columns)
-	fasta_ = df.to_dict(orient='records')
-	c = CollapseDict(fasta_,nlim=10)
-	d=c.fixedseqs()
-	header.append('ISOTYPECOUNTER')
-	header.append('VGENECOUNTER')
-	header.append('JGENECOUNTER')
-	
-	rec_list = []
-	for i, f in enumerate(d):
-	    rec=f[1]
-	    rec['sequence']=rec['KEY']
-	    rec['consensus_count']=int(rec['consensus_count']) if conscount_flag else None
-	    rec['duplicate_count']=int(rec['duplicate_count'])
-	    rec_list.append(rec)
-	df2 = pd.DataFrame(rec_list, columns = header)        
-	
-	collapse_n = str(df[df.columns[0]].count()-df2[df2.columns[0]].count())
-	
-	# removing sequences without J assignment and non functional
-	nrow_i = df2[df2.columns[0]].count()
-	cond = (~df2['j_call'].str.contains('J')|df2['productive'].isin(['F','FALSE','False']))
-	df_non = df2[cond]
-	
-	
-	df2 = df2[df2['productive'].isin(['T','TRUE','True'])]
-	cond = ~(df2['j_call'].str.contains('J'))
-	df2 = df2.drop(df2[cond].index.values)
-	
-	non_n = nrow_i-df2[df2.columns[0]].count()
-	#if conscount_flag:
-	#   df2['consensus_count'] = df2['consensus_count'].replace(1,2)
-	
-	# removing sequences with low cons count
-	
-	filter_column = "duplicate_count"
-	if conscount_flag: filter_column = "consensus_count"
-	df_cons_low = df2[df2[filter_column]<conscount_filter]
-	nrow_i = df2[df2.columns[0]].count()
-	df2 = df2[df2[filter_column]>=conscount_filter]
-	
-	
-	cons_n = str(nrow_i-df2[df2.columns[0]].count())
-	nrow_i = df2[df2.columns[0]].count()    
-	
-	df2.to_csv('${outfile}'+'passed.tsv', sep = '\t',index=False)
-	
-	df_cons_low.to_csv('${outfile}'+'failed_conscount.tsv', sep = '\t',index=False)
-	df_non.to_csv('${outfile}'+'failed_functional.tsv', sep = '\t',index=False)
-	
-	print(str(low_n)+' Sequences had N count over 10')
-	print(str(dup_n)+' Sequences had a duplicated sequnece id')
-	print(str(collapse_n)+' Sequences were collapsed')
-	print(str(df_non[df_non.columns[0]].count())+' Sequences were declared non functional or lacked a J assignment')
-	#print(str(df_cons_low[df_cons_low.columns[0]].count())+' Sequences had a '+filter_column+' lower than threshold')
-	print('Going forward with '+str(df2[df2.columns[0]].count())+' sequences')
-	
-	"""
-}else{
-	"""
-	
-	"""
-}
-
-}
-
-
-process ogrdbstats_report {
-
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_thired_alignment/$filename"}
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_thired_alignment/$filename"}
-input:
- set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
- set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
- set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_37
-
-output:
- file "*pdf"  into g_37_outputFilePdf00
- file "*csv"  into g_37_outputFileCSV11
-
-script:
-
-// general params
-chain = params.ogrdbstats_report.chain
-outname = airrFile.name.toString().substring(0, airrFile.name.toString().indexOf("_db-pass"))
-
-"""
-
-novel=""
-
-if grep -q "_[A-Z][0-9]" ${v_germline_file}; then
-	grep -A 6 "_[A-Z][0-9]" ${v_germline_file} > novel_sequences.fasta
-	novel=\$(realpath novel_sequences.fasta)
-	novel="--inf_file \$novel"
-fi
-
-IFS='\t' read -a var < ${airrFile}
-
-airrfile=${airrFile}
-
-if [[ ! "\${var[*]}" =~ "v_call_genotyped" ]]; then
-    awk -F'\t' '{col=\$5;gsub("call", "call_genotyped", col); print \$0 "\t" col}' ${airrFile} > ${outname}_genotyped.tsv
-    airrfile=${outname}_genotyped.tsv
-fi
-
-germline_file_path=\$(realpath ${germline_file})
-
-airrFile_path=\$(realpath \$airrfile)
-
-
-run_ogrdbstats \
-	\$germline_file_path \
-	"Homosapiens" \
-	\$airrFile_path \
-	${chain} \
-	\$novel 
-
-"""
-
-}
-
-
-process Third_Alignment_alignment_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_30
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
- set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_30
-
-output:
- file "*.rmd"  into g21_30_rMarkdown0_g21_49
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(Biostrings)
-
-
-makeDb_pass<-read.csv("!{readArray_makeDb_pass}", sep="\t")
-makeDb_fail<-read.csv("!{readArray_makeDb_fail}", sep="\t")
-collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
-
-threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
-
-threshold_collapse <- max(collapse_fail[[threshold_column]])
-
-
-collapse_db <- rbind(collapse_pass, collapse_fail)
-
-```
-
-
-### Plot duplicated column after collapse
-
-```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
-
-p1 <- ggplot(collapse_db, aes(!!sym(threshold_column))) +
-geom_histogram(bins = 100) +
-geom_vline(xintercept=threshold_collapse, linetype="dotted", col = "red")
-
-print(p1)
-
-```
-
-
-### Number of multiple assignment per gene (IMGT / ASC)
-
-```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
-
-collapse_db[["v_gene"]] <- getGene(collapse_db[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-plot1 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% group_by(v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(v_gene, p_single, p_multiple) %>%
-			reshape2::melt() %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
-
-print(plot1)
-
-```
-
-
-### Number of multiple assignment per gene (IMGT / ASC) collapse pass
-
-```{r echo=FALSE,message = FALSE,fig.width=30,fig.height=15}
-
-plot2 <- collapse_db %>% filter(!grepl(",", v_gene)) %>% 
-			mutate(collapse_status = !!sym(threshold_column)>= threshold_collapse) %>% 
-			group_by(collapse_status, v_gene) %>%
-			summarise(n_read = n(), multiple = sum(grepl(",", v_call)), single = n_read - multiple,
-					p_multiple = multiple/n_read*100, p_single = single/n_read*100) %>%
-			select(collapse_status, v_gene, p_single, p_multiple) %>%
-			reshape2::melt(id.vars = c("v_gene", "collapse_status")) %>%
-			ggplot(mapping = aes(v_gene, value, fill = variable)) +
-			geom_col() +
-			theme_bw() +
-			theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-			facet_grid(.~collapse_status)
-
-print(plot2)
-
-```
-
-
-### Check the number of alleles, and the amount for each gene. (IMGT / ASC)
-
-```{r echo=FALSE,message = FALSE,fig.width=35,fig.height=50}
-plot3 <- collapse_db %>%
-  filter(!!sym(threshold_column) >= threshold_collapse, !grepl(",", v_call)) %>%
-  group_by(v_gene) %>%
-  mutate(n_read = n()) %>%
-  group_by(v_gene, v_call) %>%
-  summarise(n_calls = n(), p_calls = n_calls / n_read * 100) %>%
-  arrange(v_gene, desc(p_calls)) %>%
-  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
-  geom_col() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5)) +
-  facet_wrap(.~v_gene, ncol = 4, scales = "free_x")
-
-print(plot3)
-
-```
-
-
-EOF
-	
-open OUT, ">alignment_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_alignment_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_49
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_49
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_49
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_49
- set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_49
- file rmk from g21_30_rMarkdown0_g21_49
-
-output:
- file "*.html"  into g21_49_outputFileHTML00
- file "*csv" optional true  into g21_49_csvFile11
-
-"""
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-"""
-}
-
-
-process Third_Alignment_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_38
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_38
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_38
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_38
- set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_38
-
-output:
- file "*.rmd"  into g21_38_rMarkdown0_g21_46
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(Biostrings)
-
-
-collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
-
-v_ref<-readDNAStringSet("!{v_ref}")
-v_ref<-as.character(v_ref)
-
-threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
-
-threshold_collapse <- max(collapse_fail[[threshold_column]])
-
-
-collapse_db <- rbind(collapse_pass, collapse_fail)
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
-library(reshape2)
-
-filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
-
-unique_v_calls <- unique(filtered_data[,"v_call"])
-
-# Define a function to perform the comparison and generate plots
-process_v_call <- function(v_call_value) {
-
-  seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
-  ref_seq <- v_ref[v_call_value]
-  comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
-  for (i in 1:length(seq_list)) {
-    cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
-    for (j in 1:nchar(ref_seq)) {
-      if(substr(cut_seq, j, j) == "."){
-      	comparison_matrix[i, j] <- 2
-      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
-        comparison_matrix[i, j] <- 0
-      } else {
-        comparison_matrix[i, j] <- 1
-      }
-    }
-  }
-  
-  proportion_of_ones <- colMeans(comparison_matrix == 1)
-  entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
-  entropy_vector[is.nan(entropy_vector)] <- 0
-  max_index <- which.max(entropy_vector)
-  max_value <- entropy_vector[max_index]
-  data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
-
-   
-  entropy_plot<-ggplot(data, aes(x = position, y = value)) +
-  geom_line() +
-  labs(x = "Position",y = "entropy")+
-  theme_minimal()+
-  scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
-
-
-  data_melt <- melt(comparison_matrix)
-
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
-                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
-
-  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
-
-  heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
-    geom_tile() +
-    scale_fill_manual(values =  c("white", "blue","red")) +
-    labs(x = "Position", y = "Sequence") +
-    theme_minimal() +
-    theme(legend.position = "none") +  
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-    
-  blue_counts <- colSums(comparison_matrix == 1)
-  blue_counts_df <- data.frame(Position = 1:length(blue_counts), Count = blue_counts)
-
-  histogram_plot <- ggplot(blue_counts_df, aes(x = Position, y = Count)) +
-    geom_bar(stat = "identity", fill = "blue") +
-    labs(x = "Position", y = "Mismatch Count") +
-    theme_minimal() +
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-
-  library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
-  invisible(combined_plot)
-}
-
-
-
-for (v_call_value in unique_v_calls) {
-  cat(v_call_value)
-  process_v_call(v_call_value)
-}
-
-```
-
-EOF
-	
-open OUT, ">!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_mutation_report {
-
-input:
- file rmk from g21_38_rMarkdown0_g21_46
- set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_46
-
-output:
- file "*.html"  into g21_46_outputFileHTML00
- file "*csv" optional true  into g21_46_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
-"""
-}
-
-
-process Third_Alignment_tables_postion_report {
-
-input:
- set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_41
- set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_41
-
-output:
- file "*.rmd"  into g21_41_rMarkdown0_g21_48
-
-shell:
-
-
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-install.packages("vegan")
-library(seqinr)
-library(vegan)
-library(dplyr)
-library(ggplot2)
-library(alakazam)
-library(knitr)
-
-
-
-collapse_pass<-read.delim("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.delim("!{readArray_collapse_fail}", sep="\t")
-
-datadf <- rbind(collapse_pass, collapse_fail)
-datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
-positionInfo <- function(data, v_gene, verbose=TRUE){
-    info <- list()
-    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
-    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
-        ss <- substr(data[,"sequence_alignment"],i,i)
-        ss <- toupper(ss)
-        df <- data.frame(base=unique(ss))
-        tmp <- c()
-        for ( j in 1:length(unique(ss))){
-            tmp[j] <- length(grep(df[j,1], ss))
-        }
-        df[,"rep"] <- tmp
-        rownames(df) <- as.character(df[,1])
-        df[,1] <- NULL
-        dff <- subset(df, rownames(df)!="-")
-        
-        info[[i]] <- list(
-            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
-            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
-            rich = length(unique(ss)),                                  # Position richness
-            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
-            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
-            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
-        )
-        if(verbose){
-            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
-        }
-    }
-
-    if(verbose){cat("Creating the data frame with the information \n")}
-
-    df <- data.frame(v_gene = v_gene,
-                     posi=c(1:length(info)),
-                     shan=sapply(info, `[[`, "shan"),
-                     shanc=sapply(info, `[[`, "shanc"),
-                     rich=sapply(info, `[[`, "rich"),
-                     richc=sapply(info, `[[`, "richc"),
-                     uniq=sapply(info, `[[`, "uniq"),
-                     repe=sapply(info, `[[`, "repe"))
-    
-    if(verbose){cat("Finished \n")}
-    return(df)
-}
-
-```
-
-
-```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
-replace_dots <- function(x) {
-  chartr(".", "-", x)
-}
-df <- data.frame(lapply(datadf, replace_dots))
-
-filtered_data <- df %>% filter(!grepl(",", v_call))
-
-info <- lapply(unique(filtered_data[,"v_call"]), function(g){
- cat("\n\n", "*************************", "\n")
- x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- print(knitr::kable(x))
- cat("\n\n", "*************************", "\n")
-})
-
-```
-
-EOF
-	
-open OUT, ">tables_postion_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_tables_postion_report {
-
-input:
- file rmk from g21_41_rMarkdown0_g21_48
- set val(name1), file(collaps_pass) from g21_19_outputFileTSV0_g21_48
- set val(name1), file(collaps_fail) from g21_19_outputFileTSV1_g21_48
-
-output:
- file "*.html"  into g21_48_outputFileHTML00
- file "*csv" optional true  into g21_48_csvFile11
 
 """
 
