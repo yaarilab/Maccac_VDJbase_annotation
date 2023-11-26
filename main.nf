@@ -192,7 +192,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_46;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_46;g_2_germlineFastaFile_g11_49;g_2_germlineFastaFile_g11_47;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_46;g_2_germlineFastaFile_g21_49;g_2_germlineFastaFile_g21_47}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_50;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_49;g_2_germlineFastaFile_g11_47;g_2_germlineFastaFile_g11_50;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_49;g_2_germlineFastaFile_g21_47;g_2_germlineFastaFile_g21_50}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -333,7 +333,7 @@ input:
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g0_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g0_47, g0_12_outputFileTSV0_g_8
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g0_47, g0_12_outputFileTSV0_g0_50, g0_12_outputFileTSV0_g_8
  set val("reference_set"), file("${reference_set}") optional true  into g0_12_germlineFastaFile1_g_37, g0_12_germlineFastaFile1_g_68
  set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_27, g0_12_outputFileTSV2_g0_38, g0_12_outputFileTSV2_g0_30, g0_12_outputFileTSV2_g0_49
 
@@ -552,8 +552,8 @@ input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_48, g0_19_outputFileTSV0_g0_49, g0_19_outputFileTSV0_g_68, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
- set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_48, g0_19_outputFileTSV1_g0_49
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_48, g0_19_outputFileTSV0_g0_49, g0_19_outputFileTSV0_g0_50, g0_19_outputFileTSV0_g_68, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
+ set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_48, g0_19_outputFileTSV1_g0_49, g0_19_outputFileTSV1_g0_50
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
@@ -1023,7 +1023,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_38
 
 output:
- file "*.rmd"  into g0_38_rMarkdown0_g0_46
+ file "*.rmd"  into g0_38_rMarkdown0_g0_50
 
 shell:
 
@@ -1158,21 +1158,21 @@ close OUT;
 
 process First_Alignment_render_mutation_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
 input:
- file rmk from g0_38_rMarkdown0_g0_46
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_46
+ set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_50
+ set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_50
+ set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_50
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_50
+ file rmk from g0_38_rMarkdown0_g0_50
 
 output:
- file "*.html"  into g0_46_outputFileHTML00
- file "*csv" optional true  into g0_46_csvFile11
+ file "*.html"  into g0_50_outputFileHTML00
+ file "*csv" optional true  into g0_50_csvFile11
 
 """
-
 #!/usr/bin/env Rscript 
 
 rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
 """
 }
 
@@ -1955,7 +1955,7 @@ input:
  set val(name3), file(j_germline_file) from g_8_germlineFastaFile1_g11_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49, g11_12_outputFileTSV0_g11_47
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49, g11_12_outputFileTSV0_g11_47, g11_12_outputFileTSV0_g11_50
  set val("reference_set"), file("${reference_set}") optional true  into g11_12_germlineFastaFile11
  set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_27, g11_12_outputFileTSV2_g11_38, g11_12_outputFileTSV2_g11_30, g11_12_outputFileTSV2_g11_49
 
@@ -2015,8 +2015,8 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_48, g11_19_outputFileTSV0_g11_49, g11_19_outputFileTSV0_g_15
- set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_48, g11_19_outputFileTSV1_g11_49
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_48, g11_19_outputFileTSV0_g11_49, g11_19_outputFileTSV0_g11_50, g11_19_outputFileTSV0_g_15
+ set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_48, g11_19_outputFileTSV1_g11_49, g11_19_outputFileTSV1_g11_50
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
@@ -3202,7 +3202,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_38
 
 output:
- file "*.rmd"  into g11_38_rMarkdown0_g11_46
+ file "*.rmd"  into g11_38_rMarkdown0_g11_50
 
 shell:
 
@@ -3338,19 +3338,20 @@ close OUT;
 process Second_Alignment_render_mutation_report {
 
 input:
- file rmk from g11_38_rMarkdown0_g11_46
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_46
+ set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_50
+ set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_50
+ set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_50
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_50
+ file rmk from g11_38_rMarkdown0_g11_50
 
 output:
- file "*.html"  into g11_46_outputFileHTML00
- file "*csv" optional true  into g11_46_csvFile11
+ file "*.html"  into g11_50_outputFileHTML00
+ file "*csv" optional true  into g11_50_csvFile11
 
 """
-
 #!/usr/bin/env Rscript 
 
 rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
 """
 }
 
@@ -4039,7 +4040,7 @@ input:
  set val(name3), file(j_germline_file) from g_31_germlineFastaFile1_g21_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49, g21_12_outputFileTSV0_g21_47
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49, g21_12_outputFileTSV0_g21_47, g21_12_outputFileTSV0_g21_50
  set val("reference_set"), file("${reference_set}") optional true  into g21_12_germlineFastaFile11
  set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_27, g21_12_outputFileTSV2_g21_38, g21_12_outputFileTSV2_g21_30, g21_12_outputFileTSV2_g21_49
 
@@ -4100,8 +4101,8 @@ input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_48, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g_37
- set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_48, g21_19_outputFileTSV1_g21_49
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_48, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g21_50, g21_19_outputFileTSV0_g_37
+ set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_48, g21_19_outputFileTSV1_g21_49, g21_19_outputFileTSV1_g21_50
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
@@ -4570,7 +4571,7 @@ input:
  set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_38
 
 output:
- file "*.rmd"  into g21_38_rMarkdown0_g21_46
+ file "*.rmd"  into g21_38_rMarkdown0_g21_50
 
 shell:
 
@@ -4706,19 +4707,20 @@ close OUT;
 process Third_Alignment_render_mutation_report {
 
 input:
- file rmk from g21_38_rMarkdown0_g21_46
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_46
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_50
+ set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_50
+ set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_50
+ set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_50
+ file rmk from g21_38_rMarkdown0_g21_50
 
 output:
- file "*.html"  into g21_46_outputFileHTML00
- file "*csv" optional true  into g21_46_csvFile11
+ file "*.html"  into g21_50_outputFileHTML00
+ file "*csv" optional true  into g21_50_csvFile11
 
 """
-
 #!/usr/bin/env Rscript 
 
 rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
 """
 }
 
