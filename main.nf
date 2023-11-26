@@ -5278,6 +5278,8 @@ cat(lines, sep = "\n", file = file_path, append = TRUE)
 
 }
 
+g11_27_logFile0_g_63= g11_27_logFile0_g_63.ifEmpty([""]) 
+
 
 process maccac_pipeline_statistics {
 
@@ -5301,7 +5303,8 @@ readArray_clone = clone.toString().split(' ')
 
 try_second_igblast = second_igblast.endsWith("txt") ? second_igblast : fake
 
-readArray_first_igblast = try_second_igblast.toString().split(' ')
+readArray_second_igblast = try_second_igblast.toString().split(' ')
+
 
 """
 #!/usr/bin/env Rscript 
@@ -5309,7 +5312,7 @@ readArray_first_igblast = try_second_igblast.toString().split(' ')
 x1<-"${readArray_first_igblast[0]}"
 x2<-"${readArray_clone[0]}"
 x3<-"${readArray_second_igblast[0]}"
-x3<-"${readArray_third_igblast[0]}"
+x4<-"${readArray_third_igblast[0]}"
 
 file_names <- c(x1, x2, x3,x4)
 output_file <- "output.txt"
