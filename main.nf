@@ -2305,7 +2305,7 @@ input:
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g14_0
 
 output:
- set val(name),file("*_germ-pass.tsv")  into g14_0_outputFileTSV0_g14_2, g14_0_outputFileTSV0_g14_13
+ set val(name),file("*_germ-pass.tsv")  into g14_0_outputFileTSV0_g14_2, g14_0_outputFileTSV0_g14_13, g14_0_outputFileTSV0_g14_16
 
 script:
 failed = params.Clone_AIRRseq_First_CreateGermlines.failed
@@ -2357,7 +2357,7 @@ input:
  set val(name), file(ger_df) from g14_0_outputFileTSV0_g14_13
 
 output:
- file "*.rmd"  into g14_13_rMarkdown0_g14_14
+ file "*.rmd"  into g14_13_rMarkdown0_g14_16
 
 shell:
 
@@ -2406,6 +2406,7 @@ plotMutability(model, c("A","C","G","T"), style="bar")
 ```
 
 ### comparing model to HH_S5F model
+
 ```{r echo=FALSE,message = FALSE,warnings= FALSE,fig.width=15}
 
 ggplot(merged_df, aes(x = model@mutability, y = HH_S5F@mutability)) +
@@ -2435,38 +2436,6 @@ modified_string<-str_replace_all(modified_string, "N$", "")
 top_10_names <- str_replace_all(modified_string, fixed("N"), "*")
 ```
 
-```{r echo=FALSE,message = FALSE,warnings= FALSE,fig.width=20,fig.height=30}
-
-plot_10 <- function(mer5){
-  x<-stringi::stri_locate_first(str = df[,"sequence_alignment"], regex=mer5)[,1]
-  result_df <- data.frame(result_position = x, v_call = df[,"v_call"], v_gene = df[,"v_gene"], v_family = df[,"v_family"])
-  df_filter <- result_df[complete.cases(result_df), ]
-
-  df_filter %>%
-    filter(!grepl(",", v_call)) %>%
-    mutate(n_read = n()) %>%
-    group_by(v_gene) %>%
-    summarise(v_family=v_family,n_read=n_read,n_calls = n()) %>%
-    distinct(v_family,v_gene ,.keep_all = TRUE) %>%
-    summarise(v_family=v_family,n_read=n_read,n_calls = n_calls, p_calls = n_calls / n_read * 100) %>%
-    arrange(v_gene, desc(p_calls)) %>%
-    ggplot(aes(x = reorder(v_gene, p_calls), y = p_calls)) + # Modified aes() function
-    geom_col() + 
-    theme_bw() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5,size = 15),
-          axis.ticks.x = element_line(size = 2),
-          axis.text.y = element_text(size = 15),
-          axis.ticks.y = element_line(size = 2),
-          strip.text = element_text(size = 15))+
-    facet_wrap(.~v_family, ncol = 2, scales = "free")
-}
-
-for (i in 1:length(top_10_names)) {
-  cat(top_10_rows[i,"row_names"], "\n")
-  print(plot_10(as.character(top_10_names[i])))
-}
-
-```
 
 
 EOF
@@ -2484,11 +2453,12 @@ process Clone_AIRRseq_render_Mutability_report {
 
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "mutability_plot/$filename"}
 input:
- file rmk from g14_13_rMarkdown0_g14_14
+ file rmk from g14_13_rMarkdown0_g14_16
+ set val(name), file(ger_df) from g14_0_outputFileTSV0_g14_16
 
 output:
- file "*.html"  into g14_14_outputFileHTML00
- file "*csv" optional true  into g14_14_csvFile11
+ file "*.html"  into g14_16_outputFileHTML00
+ file "*csv" optional true  into g14_16_csvFile11
 
 """
 
