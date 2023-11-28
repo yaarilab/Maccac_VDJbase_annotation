@@ -49,8 +49,9 @@ params.First_Alignment_MakeDb.inferjunction = "false"
 params.First_Alignment_MakeDb.partial = "false"
 
 // Process Parameters for First_Alignment_Collapse_AIRRseq:
-params.First_Alignment_Collapse_AIRRseq.conscount_min = 0
+params.First_Alignment_Collapse_AIRRseq.conscount_min = 2
 params.First_Alignment_Collapse_AIRRseq.n_max = 10
+params.First_Alignment_Collapse_AIRRseq.name_alignment = "_First_Alignment"
 
 // Process Parameters for Undocumented_Alleles:
 params.Undocumented_Alleles.chain = "IGH"
@@ -87,6 +88,7 @@ params.Second_Alignment_MakeDb.partial = "false"
 // Process Parameters for Second_Alignment_Collapse_AIRRseq:
 params.Second_Alignment_Collapse_AIRRseq.conscount_min = 2
 params.Second_Alignment_Collapse_AIRRseq.n_max = 10
+params.Second_Alignment_Collapse_AIRRseq.name_alignment = "_Second_Alignment"
 
 
 // part 4
@@ -172,6 +174,7 @@ params.Third_Alignment_MakeDb.partial = "false"
 // Process Parameters for Third_Alignment_Collapse_AIRRseq:
 params.Third_Alignment_Collapse_AIRRseq.conscount_min = 2
 params.Third_Alignment_Collapse_AIRRseq.n_max = 10
+params.Third_Alignment_Collapse_AIRRseq.name_alignment = "_Third_Alignment"
 
 
 // part 7
@@ -192,7 +195,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 ch_empty_file_4 = file("$baseDir/.emptyfiles/NO_FILE_4", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_52;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_38;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_50;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_38;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_49;g_2_germlineFastaFile_g11_47;g_2_germlineFastaFile_g11_50;g_2_germlineFastaFile_g21_22;g_2_germlineFastaFile_g21_12;g_2_germlineFastaFile_g21_43;g_2_germlineFastaFile_g21_38;g_2_germlineFastaFile_g21_30;g_2_germlineFastaFile_g21_49;g_2_germlineFastaFile_g21_47;g_2_germlineFastaFile_g21_50}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g_15;g_2_germlineFastaFile_g_37;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_12;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_30;g_2_germlineFastaFile_g0_49;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g11_22;g_2_germlineFastaFile_g11_12;g_2_germlineFastaFile_g11_43;g_2_germlineFastaFile_g11_30;g_2_germlineFastaFile_g11_49;g_2_germlineFastaFile_g11_47}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_30;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12;g_3_germlineFastaFile_g14_0;g_3_germlineFastaFile_g14_1}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_31;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12;g_4_germlineFastaFile_g11_17;g_4_germlineFastaFile_g11_12;g_4_germlineFastaFile_g14_0;g_4_germlineFastaFile_g14_1}
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
@@ -333,9 +336,9 @@ input:
  set val(name3), file(j_germline_file) from g_4_germlineFastaFile_g0_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g0_38, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g0_47, g0_12_outputFileTSV0_g0_50, g0_12_outputFileTSV0_g_8
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g0_12_outputFileTSV0_g0_27, g0_12_outputFileTSV0_g0_43, g0_12_outputFileTSV0_g0_30, g0_12_outputFileTSV0_g0_49, g0_12_outputFileTSV0_g0_47, g0_12_outputFileTSV0_g0_19, g0_12_outputFileTSV0_g_8
  set val("reference_set"), file("${reference_set}") optional true  into g0_12_germlineFastaFile1_g_37, g0_12_germlineFastaFile1_g_68
- set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_27, g0_12_outputFileTSV2_g0_38, g0_12_outputFileTSV2_g0_30, g0_12_outputFileTSV2_g0_49
+ set val(name_igblast),file("*_db-fail.tsv")  into g0_12_outputFileTSV2_g0_27, g0_12_outputFileTSV2_g0_30, g0_12_outputFileTSV2_g0_49
 
 script:
 
@@ -547,19 +550,21 @@ if (class(novel) != 'try-error') {
 
 process First_Alignment_Collapse_AIRRseq {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "collapse_seq_output/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "rearrangements/$filename"}
 input:
  set val(name),file(airrFile) from g0_12_outputFileTSV0_g0_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_41, g0_19_outputFileTSV0_g0_38, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_48, g0_19_outputFileTSV0_g0_49, g0_19_outputFileTSV0_g0_50, g0_19_outputFileTSV0_g_68, g0_19_outputFileTSV0_g_15, g0_19_outputFileTSV0_g_52
- set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_41, g0_19_outputFileTSV1_g0_38, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_48, g0_19_outputFileTSV1_g0_49, g0_19_outputFileTSV1_g0_50
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g0_19_outputFileTSV0_g0_27, g0_19_outputFileTSV0_g0_30, g0_19_outputFileTSV0_g0_49, g0_19_outputFileTSV0_g_68, g0_19_outputFileTSV0_g_15
+ set val(name), file("${outfile}"+"failed*") optional true  into g0_19_outputFileTSV1_g0_27, g0_19_outputFileTSV1_g0_30, g0_19_outputFileTSV1_g0_49
 
 script:
 conscount_min = params.First_Alignment_Collapse_AIRRseq.conscount_min
 n_max = params.First_Alignment_Collapse_AIRRseq.n_max
+name_alignment = params.First_Alignment_Collapse_AIRRseq.name_alignment
 
-outfile = airrFile.toString() - '.tsv' +"_collapsed-"
+
+outfile = airrFile.toString() - '.tsv' + name_alignment + "_collapsed-"
 
 if(airrFile.getName().endsWith(".tsv")){	
 	"""
@@ -799,8 +804,8 @@ if(airrFile.getName().endsWith(".tsv")){
 
 process ogrdbstats_report_first_alignment {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_first_alignment/$filename"}
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_first_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbstats_first_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbstats_first_alignment/$filename"}
 input:
  set val(name),file(airrFile) from g0_19_outputFileTSV0_g_68
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_68
@@ -852,7 +857,7 @@ run_ogrdbstats \
 }
 
 
-process First_Alignment_alignment_report {
+process First_Alignment_after_collapse_report {
 
 input:
  set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_30
@@ -981,7 +986,7 @@ print(plot3)
 
 EOF
 	
-open OUT, ">alignment_report_!{name}.rmd";
+open OUT, ">after_collapse_report_!{name}.rmd";
 print OUT $script;
 close OUT;
 
@@ -990,9 +995,9 @@ close OUT;
 }
 
 
-process First_Alignment_render_alignment_report {
+process First_Alignment_render_after_collapse_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "First_Alignment_log/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
 input:
  set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_49
  set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_49
@@ -1013,400 +1018,7 @@ rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_di
 }
 
 
-process First_Alignment_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_38
- set val(name1), file(makeDb_fail) from g0_12_outputFileTSV2_g0_38
- set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_38
- set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_38
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_38
-
-output:
- file "*.rmd"  into g0_38_rMarkdown0_g0_50
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(Biostrings)
-
-
-collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
-
-v_ref<-readDNAStringSet("!{v_ref}")
-v_ref<-as.character(v_ref)
-
-threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
-
-threshold_collapse <- max(collapse_fail[[threshold_column]])
-
-
-collapse_db <- rbind(collapse_pass, collapse_fail)
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
-library(reshape2)
-
-filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
-
-unique_v_calls <- unique(filtered_data[,"v_call"])
-
-# Define a function to perform the comparison and generate plots
-process_v_call <- function(v_call_value) {
-
-  seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
-  ref_seq <- v_ref[v_call_value]
-  comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
-  for (i in 1:length(seq_list)) {
-    cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
-    for (j in 1:nchar(ref_seq)) {
-      if(substr(cut_seq, j, j) == "."){
-      	comparison_matrix[i, j] <- 2
-      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
-        comparison_matrix[i, j] <- 0
-      } else {
-        comparison_matrix[i, j] <- 1
-      }
-    }
-  }
-  
-  proportion_of_ones <- colMeans(comparison_matrix == 1)
-  entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
-  entropy_vector[is.nan(entropy_vector)] <- 0
-  max_index <- which.max(entropy_vector)
-  max_value <- entropy_vector[max_index]
-  data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
-
-   
-  entropy_plot<-ggplot(data, aes(x = position, y = value)) +
-  geom_line() +
-  labs(x = "Position",y = "entropy")+
-  theme_minimal()+
-  scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
-
-
-  data_melt <- melt(comparison_matrix)
-
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
-                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
-
-  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
-
-  heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
-    geom_tile() +
-    scale_fill_manual(values =  c("white", "blue","red")) +
-    labs(x = "Position", y = "Sequence") +
-    theme_minimal() +
-    theme(legend.position = "none") +  
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-    
-  blue_counts <- colSums(comparison_matrix == 1)
-  blue_counts_df <- data.frame(Position = 1:length(blue_counts), Count = blue_counts)
-
-  histogram_plot <- ggplot(blue_counts_df, aes(x = Position, y = Count)) +
-    geom_bar(stat = "identity", fill = "blue") +
-    labs(x = "Position", y = "Mismatch Count") +
-    theme_minimal() +
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-
-  library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
-  invisible(combined_plot)
-}
-
-
-
-for (v_call_value in unique_v_calls) {
-  cat(v_call_value)
-  process_v_call(v_call_value)
-}
-
-```
-
-EOF
-	
-open OUT, ">!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process First_Alignment_render_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_50
- set val(name2), file(collapse_pass) from g0_19_outputFileTSV0_g0_50
- set val(name3), file(collapse_fail) from g0_19_outputFileTSV1_g0_50
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g0_50
- file rmk from g0_38_rMarkdown0_g0_50
-
-output:
- file "*.html"  into g0_50_outputFileHTML00
- file "*csv" optional true  into g0_50_csvFile11
-
-"""
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-"""
-}
-
-if(params.container.startsWith("peresay")){
-	cmd = 'source("/usr/local/bin/functions_tigger.R")'
-}else{
-	cmd = 'library(tigger)'
-}
-process asc_allele_distribution {
-
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.pdf$/) "allele_distribution_report/$filename"}
-input:
- set val(name),file(airr_file) from g0_19_outputFileTSV0_g_52
- set val(v_germline_name), file(v_germline_file) from g_2_germlineFastaFile_g_52
-
-output:
- file "*.pdf" optional true  into g_52_outputFilePdf00
-
-script:
-
-out_file = airr_file.toString() - ".tsv" + "_novel-passed.tsv"
-
-"""
-#!/usr/bin/env Rscript
-#install.packages("ggforce")
-# libraries
-suppressMessages(require(dplyr))
-suppressMessages(require(ggplot2))
-suppressMessages(require(alakazam))
-#library(ggforce)
-
-
-# read data and germline
-data <- data.table::fread('${airr_file}', stringsAsFactors = F, data.table = F)
-vgerm <- tigger::readIgFasta('${v_germline_file}')
-
-data[["v_gene"]] <- getGene(data[["v_call"]],strip_d = FALSE)
-
-data_report <- data %>% 
-	filter(!grepl(",",v_call)) %>%
-	group_by(v_gene) %>% 
-	mutate(asc_count = n()) %>%
-	group_by(v_gene, v_call, asc_count) %>% 
-	summarise(allele_count = n(), allele_precentage = allele_count/asc_count*100) %>%
-	arrange(v_gene, desc(allele_precentage))
-
-
-all_groups <- unique(data_report[["v_gene"]])
-n_all_groups <- length(all_groups)
-n_col <- 3
-n_row <- 4
-start_idx <- seq(1, n_all_groups, n_col*n_row)
-group_splits <- lapply(start_idx, 
-       function(i){
-         all_groups[i:(i+ n_col*n_row -1)]
-})
-
-i <- 0
-for(groups in group_splits){
-  i <- i + 1
-  p <- data_report %>%
-    filter(v_gene %in% groups) %>% 
-    arrange(v_gene, allele_precentage) %>%
-    #ggplot(data_report, aes(v_call, allele_count)) +
-    ggplot(mapping = aes(v_call, allele_count)) +
-		geom_col(mapping = aes(v_call, allele_count)) + 
-		#geom_point(mapping = aes(v_call, allele_precentage),
-        #     colour = 'grey70', size = 2) + theme_bw() +
-        facet_wrap(.~v_gene, ncol = 3, nrow = 4, scales = "free") +
-		#scale_y_continuous(name = "Count", sec.axis = sec_axis(~./asc_count*100, name="%")) +
-		theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=0.5))
-		
-		
-  ggsave(plot = p, filename = paste0('page_', i, '.pdf'), width = 10, height = 25)
-}
-  
-  
-#p1 <- ggplot(data_report, aes(v_call, allele_count)) +
-#		geom_col(mapping = aes(v_call, allele_count)) + 
-#		geom_point(mapping = aes(v_call, allele_precentage),
-#             colour = 'grey70', size = 2) + theme_bw() +
-#		scale_y_continuous(name = "Count", sec.axis = sec_axis(~., name="%")) +
-#		theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=0.5)) +
-#		facet_wrap_paginate(.~v_gene, ncol = 3, nrow = 4, scales = "free")
-#		
-
-#ggsave("ASC_allele_usage_distribution.pdf", p1, width = 12, height = 50)
-
-"""
-
-}
-
-
-process First_Alignment_tables_postion_report {
-
-input:
- set val(name), file(collapse_pass) from g0_19_outputFileTSV0_g0_41
- set val(name1), file(collapse_fail) from g0_19_outputFileTSV1_g0_41
-
-output:
- file "*.rmd"  into g0_41_rMarkdown0_g0_48
-
-shell:
-
-
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-install.packages("vegan")
-library(seqinr)
-library(vegan)
-library(dplyr)
-library(ggplot2)
-library(alakazam)
-library(knitr)
-
-
-
-collapse_pass<-read.delim("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.delim("!{readArray_collapse_fail}", sep="\t")
-
-datadf <- rbind(collapse_pass, collapse_fail)
-datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
-positionInfo <- function(data, v_gene, verbose=TRUE){
-    info <- list()
-    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
-    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
-        ss <- substr(data[,"sequence_alignment"],i,i)
-        ss <- toupper(ss)
-        df <- data.frame(base=unique(ss))
-        tmp <- c()
-        for ( j in 1:length(unique(ss))){
-            tmp[j] <- length(grep(df[j,1], ss))
-        }
-        df[,"rep"] <- tmp
-        rownames(df) <- as.character(df[,1])
-        df[,1] <- NULL
-        dff <- subset(df, rownames(df)!="-")
-        
-        info[[i]] <- list(
-            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
-            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
-            rich = length(unique(ss)),                                  # Position richness
-            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
-            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
-            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
-        )
-        if(verbose){
-            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
-        }
-    }
-
-    if(verbose){cat("Creating the data frame with the information \n")}
-
-    df <- data.frame(v_gene = v_gene,
-                     posi=c(1:length(info)),
-                     shan=sapply(info, `[[`, "shan"),
-                     shanc=sapply(info, `[[`, "shanc"),
-                     rich=sapply(info, `[[`, "rich"),
-                     richc=sapply(info, `[[`, "richc"),
-                     uniq=sapply(info, `[[`, "uniq"),
-                     repe=sapply(info, `[[`, "repe"))
-    
-    if(verbose){cat("Finished \n")}
-    return(df)
-}
-
-```
-
-
-```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
-replace_dots <- function(x) {
-  chartr(".", "-", x)
-}
-df <- data.frame(lapply(datadf, replace_dots))
-
-filtered_data <- df %>% filter(!grepl(",", v_call))
-
-info <- lapply(unique(filtered_data[,"v_call"]), function(g){
- cat("\n\n", "*************************", "\n")
- x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- print(knitr::kable(x))
- cat("\n\n", "*************************", "\n")
-})
-
-```
-
-EOF
-	
-open OUT, ">tables_postion_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process First_Alignment_render_tables_postion_report {
-
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
-input:
- file rmk from g0_41_rMarkdown0_g0_48
- set val(name1), file(collaps_pass) from g0_19_outputFileTSV0_g0_48
- set val(name1), file(collaps_fail) from g0_19_outputFileTSV1_g0_48
-
-output:
- file "*.html"  into g0_48_outputFileHTML00
- file "*csv" optional true  into g0_48_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
-"""
-}
-
-
-process First_Alignment_start_postion_report {
+process First_Alignment_after_make_db_report {
 
 input:
  set val(name), file(makeDb_pass) from g0_12_outputFileTSV0_g0_43
@@ -1455,7 +1067,7 @@ df_filter[,"count_N"] <- stringi::stri_count_fixed(str = df_filter[,"sequence_al
 
 
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 
@@ -1473,7 +1085,7 @@ ggplot(df, aes(start_v)) + stat_ecdf() +
 ```
 
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 
@@ -1516,7 +1128,7 @@ ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
 
 ## V identity
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
 
@@ -1529,7 +1141,7 @@ ggplot(df, aes(x = v_identity)) +
 
 ```
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
 
@@ -1547,7 +1159,7 @@ ggplot(df_filter, aes(x = v_identity)) +
 ## N count
 
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 max_length <- max(nchar(df[,"sequence_alignment"]))
@@ -1581,7 +1193,7 @@ labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
 ```
 
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 max_length <- max(nchar(df_filter[,"sequence_alignment"]))
@@ -1617,7 +1229,8 @@ labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
 
 ## Functionality
 
-### all redas
+### all reads
+
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
 
 
@@ -1666,7 +1279,7 @@ p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
 grid.arrange(p1, p2,p3 ,ncol = 3)
 ```
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
 
@@ -1732,16 +1345,16 @@ df_filter %>%
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5,size = 15),
         axis.ticks.x = element_line(size = 2),
-        axis.text.y = element_text(size = 30),
+        axis.text.y = element_text(size = 20),
         axis.ticks.y = element_line(size = 2),
-        strip.text = element_text(size = 30))+
-  facet_wrap(.~v_gene, ncol = 3, scales = "free")
+        strip.text = element_text(size = 20))+
+  facet_wrap(.~v_gene, ncol = 4, scales = "free")
   
 ```
 
 EOF
 	
-open OUT, ">start_postion_report_!{name}.rmd";
+open OUT, ">after_make_db_report_!{name}.rmd";
 print OUT $script;
 close OUT;
 
@@ -1750,7 +1363,7 @@ close OUT;
 }
 
 
-process First_Alignment_render_start_postion_report {
+process First_Alignment_render_after_make_db_report {
 
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.html$/) "first_alignment_reports/$filename"}
 input:
@@ -1955,9 +1568,9 @@ input:
  set val(name3), file(j_germline_file) from g_8_germlineFastaFile1_g11_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_19, g11_12_outputFileTSV0_g11_38, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49, g11_12_outputFileTSV0_g11_47, g11_12_outputFileTSV0_g11_50
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g11_12_outputFileTSV0_g11_27, g11_12_outputFileTSV0_g11_43, g11_12_outputFileTSV0_g11_30, g11_12_outputFileTSV0_g11_49, g11_12_outputFileTSV0_g11_47, g11_12_outputFileTSV0_g11_19
  set val("reference_set"), file("${reference_set}") optional true  into g11_12_germlineFastaFile11
- set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_27, g11_12_outputFileTSV2_g11_38, g11_12_outputFileTSV2_g11_30, g11_12_outputFileTSV2_g11_49
+ set val(name_igblast),file("*_db-fail.tsv")  into g11_12_outputFileTSV2_g11_27, g11_12_outputFileTSV2_g11_30, g11_12_outputFileTSV2_g11_49
 
 script:
 
@@ -2015,14 +1628,16 @@ input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g11_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_41, g11_19_outputFileTSV0_g11_38, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_48, g11_19_outputFileTSV0_g11_49, g11_19_outputFileTSV0_g11_50, g11_19_outputFileTSV0_g_15
- set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_41, g11_19_outputFileTSV1_g11_38, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_48, g11_19_outputFileTSV1_g11_49, g11_19_outputFileTSV1_g11_50
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g11_19_outputFileTSV0_g11_27, g11_19_outputFileTSV0_g11_30, g11_19_outputFileTSV0_g11_49, g11_19_outputFileTSV0_g_15
+ set val(name), file("${outfile}"+"failed*") optional true  into g11_19_outputFileTSV1_g11_27, g11_19_outputFileTSV1_g11_30, g11_19_outputFileTSV1_g11_49
 
 script:
 conscount_min = params.Second_Alignment_Collapse_AIRRseq.conscount_min
 n_max = params.Second_Alignment_Collapse_AIRRseq.n_max
+name_alignment = params.Second_Alignment_Collapse_AIRRseq.name_alignment
 
-outfile = airrFile.toString() - '.tsv' +"_collapsed-"
+
+outfile = airrFile.toString() - '.tsv' + name_alignment + "_collapsed-"
 
 if(airrFile.getName().endsWith(".tsv")){	
 	"""
@@ -2418,6 +2033,8 @@ ggplot(merged_df, aes(x = model@mutability, y = HH_S5F@mutability)) +
        color = 'Data Availability')
 ```
 
+### 10 5mer max mutability: 
+
 ```{r echo=FALSE,message = FALSE,warnings= FALSE,fig.width=20}
 
 ordered_df <- merged_df[order(-merged_df[,"mutability"]), ]
@@ -2426,7 +2043,7 @@ ordered_df <- merged_df[order(-merged_df[,"mutability"]), ]
 top_10_rows <- head(ordered_df, 10)
 
 # Print row names in a list
-cat(paste("10 5mer max mutability:","\n", toString(top_10_rows[,"row_names"])))
+cat(toString(top_10_rows[,"row_names"]))
 
 #modified_string <- gsub("N", "*", top_10_rows[,"row_names"])
 #top_10_names <- gsub("^\\*|\\*$", "", modified_string)
@@ -2599,7 +2216,7 @@ CreateGermlines.py \
 
 process Clone_AIRRseq_single_clone_representative {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.pdf$/) "clone_report/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*png$/) "clone_report/$filename"}
 input:
  set val(name),file(airrFile) from g14_1_outputFileTSV0_g14_9
  set val(name1),file(source_airrFile) from g_15_outputFileTSV0_g14_9
@@ -2608,6 +2225,7 @@ output:
  set val(outname),file(outfile)  into g14_9_outputFileTSV0_g_29, g14_9_outputFileTSV0_g_30, g14_9_outputFileTSV0_g_31
  file "*.pdf" optional true  into g14_9_outputFilePdf11
  set val(name), file("*txt")  into g14_9_logFile2_g_63
+ file "*png"  into g14_9_outputFile33
 
 script:
 outname = airrFile.toString() - '.tsv' +"_clone_rep-passed"
@@ -2719,7 +2337,7 @@ library(gridExtra)
 final_plot <- do.call(grid.arrange, plots)
 
 
-ggsave("new_clone_distribution_by_v_call.pdf", final_plot, width = 30, height = 40)
+ggsave("clone_distribution_by_v_call.png", final_plot, width = 30, height = 40)
 
 
 
@@ -2946,7 +2564,7 @@ input:
 
 output:
  set val("${call}_genotype"),file("${call}_genotype_report.tsv")  into g_29_outputFileTSV00
- set val("${call}_personal_reference"), file("${call}_personal_reference.fasta")  into g_29_germlineFastaFile11
+ set val("${call}_personal_reference"), file("${call}_personal_reference.fasta")  into g_29_germlineFastaFile1_g21_22, g_29_germlineFastaFile1_g21_12, g_29_germlineFastaFile1_g21_43, g_29_germlineFastaFile1_g21_30, g_29_germlineFastaFile1_g21_49, g_29_germlineFastaFile1_g21_47
 
 script:
 
@@ -3032,7 +2650,32 @@ writeFasta(germline_db_new, file = paste0("${call}","_personal_reference.fasta")
 }
 
 
-process Second_Alignment_alignment_report {
+process Third_Alignment_V_MakeBlastDb {
+
+input:
+ set val(db_name), file(germlineFile) from g_29_germlineFastaFile1_g21_22
+
+output:
+ file "${db_name}"  into g21_22_germlineDb0_g21_9
+
+script:
+
+if(germlineFile.getName().endsWith("fasta")){
+	"""
+	sed -e '/^>/! s/[.]//g' ${germlineFile} > tmp_germline.fasta
+	mkdir -m777 ${db_name}
+	makeblastdb -parse_seqids -dbtype nucl -in tmp_germline.fasta -out ${db_name}/${db_name}
+	"""
+}else{
+	"""
+	echo something if off
+	"""
+}
+
+}
+
+
+process Second_Alignment_after_collapse_report {
 
 input:
  set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_30
@@ -3161,7 +2804,7 @@ print(plot3)
 
 EOF
 	
-open OUT, ">alignment_report_!{name}.rmd";
+open OUT, ">after_collapse_report_!{name}.rmd";
 print OUT $script;
 close OUT;
 
@@ -3170,7 +2813,7 @@ close OUT;
 }
 
 
-process Second_Alignment_render_alignment_report {
+process Second_Alignment_render_after_collapse_report {
 
 input:
  set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_49
@@ -3192,310 +2835,7 @@ rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_di
 }
 
 
-process Second_Alignment_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_38
- set val(name1), file(makeDb_fail) from g11_12_outputFileTSV2_g11_38
- set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_38
- set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_38
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_38
-
-output:
- file "*.rmd"  into g11_38_rMarkdown0_g11_50
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(Biostrings)
-
-
-collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
-
-v_ref<-readDNAStringSet("!{v_ref}")
-v_ref<-as.character(v_ref)
-
-threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
-
-threshold_collapse <- max(collapse_fail[[threshold_column]])
-
-
-collapse_db <- rbind(collapse_pass, collapse_fail)
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
-library(reshape2)
-
-filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
-
-unique_v_calls <- unique(filtered_data[,"v_call"])
-
-# Define a function to perform the comparison and generate plots
-process_v_call <- function(v_call_value) {
-
-  seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
-  ref_seq <- v_ref[v_call_value]
-  comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
-  for (i in 1:length(seq_list)) {
-    cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
-    for (j in 1:nchar(ref_seq)) {
-      if(substr(cut_seq, j, j) == "."){
-      	comparison_matrix[i, j] <- 2
-      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
-        comparison_matrix[i, j] <- 0
-      } else {
-        comparison_matrix[i, j] <- 1
-      }
-    }
-  }
-  
-  proportion_of_ones <- colMeans(comparison_matrix == 1)
-  entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
-  entropy_vector[is.nan(entropy_vector)] <- 0
-  max_index <- which.max(entropy_vector)
-  max_value <- entropy_vector[max_index]
-  data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
-
-   
-  entropy_plot<-ggplot(data, aes(x = position, y = value)) +
-  geom_line() +
-  labs(x = "Position",y = "entropy")+
-  theme_minimal()+
-  scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
-
-
-  data_melt <- melt(comparison_matrix)
-
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
-                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
-
-  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
-
-  heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
-    geom_tile() +
-    scale_fill_manual(values =  c("white", "blue","red")) +
-    labs(x = "Position", y = "Sequence") +
-    theme_minimal() +
-    theme(legend.position = "none") +  
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-    
-  blue_counts <- colSums(comparison_matrix == 1)
-  blue_counts_df <- data.frame(Position = 1:length(blue_counts), Count = blue_counts)
-
-  histogram_plot <- ggplot(blue_counts_df, aes(x = Position, y = Count)) +
-    geom_bar(stat = "identity", fill = "blue") +
-    labs(x = "Position", y = "Mismatch Count") +
-    theme_minimal() +
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-
-  library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
-  invisible(combined_plot)
-}
-
-
-
-for (v_call_value in unique_v_calls) {
-  cat(v_call_value)
-  process_v_call(v_call_value)
-}
-
-```
-
-EOF
-	
-open OUT, ">!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Second_Alignment_render_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_50
- set val(name2), file(collapse_pass) from g11_19_outputFileTSV0_g11_50
- set val(name3), file(collapse_fail) from g11_19_outputFileTSV1_g11_50
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g11_50
- file rmk from g11_38_rMarkdown0_g11_50
-
-output:
- file "*.html"  into g11_50_outputFileHTML00
- file "*csv" optional true  into g11_50_csvFile11
-
-"""
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-"""
-}
-
-
-process Second_Alignment_tables_postion_report {
-
-input:
- set val(name), file(collapse_pass) from g11_19_outputFileTSV0_g11_41
- set val(name1), file(collapse_fail) from g11_19_outputFileTSV1_g11_41
-
-output:
- file "*.rmd"  into g11_41_rMarkdown0_g11_48
-
-shell:
-
-
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-install.packages("vegan")
-library(seqinr)
-library(vegan)
-library(dplyr)
-library(ggplot2)
-library(alakazam)
-library(knitr)
-
-
-
-collapse_pass<-read.delim("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.delim("!{readArray_collapse_fail}", sep="\t")
-
-datadf <- rbind(collapse_pass, collapse_fail)
-datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
-positionInfo <- function(data, v_gene, verbose=TRUE){
-    info <- list()
-    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
-    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
-        ss <- substr(data[,"sequence_alignment"],i,i)
-        ss <- toupper(ss)
-        df <- data.frame(base=unique(ss))
-        tmp <- c()
-        for ( j in 1:length(unique(ss))){
-            tmp[j] <- length(grep(df[j,1], ss))
-        }
-        df[,"rep"] <- tmp
-        rownames(df) <- as.character(df[,1])
-        df[,1] <- NULL
-        dff <- subset(df, rownames(df)!="-")
-        
-        info[[i]] <- list(
-            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
-            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
-            rich = length(unique(ss)),                                  # Position richness
-            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
-            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
-            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
-        )
-        if(verbose){
-            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
-        }
-    }
-
-    if(verbose){cat("Creating the data frame with the information \n")}
-
-    df <- data.frame(v_gene = v_gene,
-                     posi=c(1:length(info)),
-                     shan=sapply(info, `[[`, "shan"),
-                     shanc=sapply(info, `[[`, "shanc"),
-                     rich=sapply(info, `[[`, "rich"),
-                     richc=sapply(info, `[[`, "richc"),
-                     uniq=sapply(info, `[[`, "uniq"),
-                     repe=sapply(info, `[[`, "repe"))
-    
-    if(verbose){cat("Finished \n")}
-    return(df)
-}
-
-```
-
-
-```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
-replace_dots <- function(x) {
-  chartr(".", "-", x)
-}
-df <- data.frame(lapply(datadf, replace_dots))
-
-filtered_data <- df %>% filter(!grepl(",", v_call))
-
-info <- lapply(unique(filtered_data[,"v_call"]), function(g){
- cat("\n\n", "*************************", "\n")
- x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- print(knitr::kable(x))
- cat("\n\n", "*************************", "\n")
-})
-
-```
-
-EOF
-	
-open OUT, ">tables_postion_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Second_Alignment_render_tables_postion_report {
-
-input:
- file rmk from g11_41_rMarkdown0_g11_48
- set val(name1), file(collaps_pass) from g11_19_outputFileTSV0_g11_48
- set val(name1), file(collaps_fail) from g11_19_outputFileTSV1_g11_48
-
-output:
- file "*.html"  into g11_48_outputFileHTML00
- file "*csv" optional true  into g11_48_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
-"""
-}
-
-
-process Second_Alignment_start_postion_report {
+process Second_Alignment_after_make_db_report {
 
 input:
  set val(name), file(makeDb_pass) from g11_12_outputFileTSV0_g11_43
@@ -3544,7 +2884,7 @@ df_filter[,"count_N"] <- stringi::stri_count_fixed(str = df_filter[,"sequence_al
 
 
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 
@@ -3562,7 +2902,7 @@ ggplot(df, aes(start_v)) + stat_ecdf() +
 ```
 
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 
@@ -3605,7 +2945,7 @@ ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
 
 ## V identity
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
 
@@ -3618,7 +2958,7 @@ ggplot(df, aes(x = v_identity)) +
 
 ```
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
 
@@ -3636,7 +2976,7 @@ ggplot(df_filter, aes(x = v_identity)) +
 ## N count
 
 
-### all redas
+### all reads
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 max_length <- max(nchar(df[,"sequence_alignment"]))
@@ -3670,7 +3010,7 @@ labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
 ```
 
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
 max_length <- max(nchar(df_filter[,"sequence_alignment"]))
@@ -3706,7 +3046,8 @@ labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
 
 ## Functionality
 
-### all redas
+### all reads
+
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
 
 
@@ -3755,7 +3096,7 @@ p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
 grid.arrange(p1, p2,p3 ,ncol = 3)
 ```
 
-### single asigmant 
+### single assignment 
 
 ```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
 
@@ -3821,16 +3162,16 @@ df_filter %>%
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5,size = 15),
         axis.ticks.x = element_line(size = 2),
-        axis.text.y = element_text(size = 30),
+        axis.text.y = element_text(size = 20),
         axis.ticks.y = element_line(size = 2),
-        strip.text = element_text(size = 30))+
-  facet_wrap(.~v_gene, ncol = 3, scales = "free")
+        strip.text = element_text(size = 20))+
+  facet_wrap(.~v_gene, ncol = 4, scales = "free")
   
 ```
 
 EOF
 	
-open OUT, ">start_postion_report_!{name}.rmd";
+open OUT, ">after_make_db_report_!{name}.rmd";
 print OUT $script;
 close OUT;
 
@@ -3839,7 +3180,7 @@ close OUT;
 }
 
 
-process Second_Alignment_render_start_postion_report {
+process Second_Alignment_render_after_make_db_report {
 
 input:
  file rmk from g11_43_rMarkdown0_g11_47
@@ -3960,31 +3301,6 @@ if(germlineFile.getName().endsWith("fasta")){
 }
 
 
-process Third_Alignment_V_MakeBlastDb {
-
-input:
- set val(db_name), file(germlineFile) from g_2_germlineFastaFile_g21_22
-
-output:
- file "${db_name}"  into g21_22_germlineDb0_g21_9
-
-script:
-
-if(germlineFile.getName().endsWith("fasta")){
-	"""
-	sed -e '/^>/! s/[.]//g' ${germlineFile} > tmp_germline.fasta
-	mkdir -m777 ${db_name}
-	makeblastdb -parse_seqids -dbtype nucl -in tmp_germline.fasta -out ${db_name}/${db_name}
-	"""
-}else{
-	"""
-	echo something if off
-	"""
-}
-
-}
-
-
 process Third_Alignment_IgBlastn {
 
 input:
@@ -4035,14 +3351,14 @@ process Third_Alignment_MakeDb {
 input:
  set val(name),file(fastaFile) from g_44_fastaFile_g21_12
  set val(name_igblast),file(igblastOut) from g21_9_igblastOut0_g21_12
- set val(name1), file(v_germline_file) from g_2_germlineFastaFile_g21_12
+ set val(name1), file(v_germline_file) from g_29_germlineFastaFile1_g21_12
  set val(name2), file(d_germline_file) from g_30_germlineFastaFile1_g21_12
  set val(name3), file(j_germline_file) from g_31_germlineFastaFile1_g21_12
 
 output:
- set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_19, g21_12_outputFileTSV0_g21_38, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49, g21_12_outputFileTSV0_g21_47, g21_12_outputFileTSV0_g21_50
+ set val(name_igblast),file("*_db-pass.tsv") optional true  into g21_12_outputFileTSV0_g21_27, g21_12_outputFileTSV0_g21_43, g21_12_outputFileTSV0_g21_30, g21_12_outputFileTSV0_g21_49, g21_12_outputFileTSV0_g21_47, g21_12_outputFileTSV0_g21_19
  set val("reference_set"), file("${reference_set}") optional true  into g21_12_germlineFastaFile11
- set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_27, g21_12_outputFileTSV2_g21_38, g21_12_outputFileTSV2_g21_30, g21_12_outputFileTSV2_g21_49
+ set val(name_igblast),file("*_db-fail.tsv")  into g21_12_outputFileTSV2_g21_27, g21_12_outputFileTSV2_g21_30, g21_12_outputFileTSV2_g21_49
 
 script:
 
@@ -4094,21 +3410,389 @@ if(igblastOut.getName().endsWith(".out")){
 }
 
 
+process Third_Alignment_after_make_db_report {
+
+input:
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_43
+ set val(name2), file(v_ref) from g_29_germlineFastaFile1_g21_43
+
+output:
+ file "*.rmd"  into g21_43_rMarkdown0_g21_47
+
+shell:
+
+readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
+readArray_v_ref = v_ref.toString().split(' ')[0]
+
+'''
+#!/usr/bin/env perl
+
+
+my $script = <<'EOF';
+
+
+```{r echo=FALSE,message = FALSE}
+library(ggplot2)
+library(rlang)
+library(alakazam)
+library(dplyr)
+library(stringi)
+
+
+df <-read.delim("!{readArray_makeDb_pass}", sep="\t")
+
+df[["v_gene"]] <- getGene(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+df[["v_family"]] <- getFamily(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
+
+df_filter <- df %>% filter(!grepl(",", v_call))
+
+
+df[,"start_v"] <- stringi::stri_locate_first(str = df[,"sequence_alignment"], regex="[ATCG]")[,1]
+df_filter[,"start_v"] <-  stringi::stri_locate_first(str = df_filter[,"sequence_alignment"], regex="[ATCG]")[,1]
+
+df[,"count_N"] <- stringi::stri_count_fixed(str = df[,"sequence_alignment"],"N")
+df_filter[,"count_N"] <- stringi::stri_count_fixed(str = df_filter[,"sequence_alignment"],"N")
+
+
+```
+
+
+
+### all reads
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+
+df[,"start_v"] <- stringi::stri_locate_first(str = df[,"sequence_alignment"], regex="[ATCG]")[,1]
+
+ggplot(df, aes(start_v)) + stat_ecdf() +
+  scale_x_continuous(breaks = seq(0, max(df[["start_v"]]), by = 10),
+                     labels = seq(0, max(df[["start_v"]]), by = 10)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
+					labels = seq(0, 1, by = 0.1)) +
+  theme(axis.text.x = element_text(size = 12),
+        axis.ticks.x = element_line(size = 2),
+        axis.ticks.y = element_line(size = 2))
+
+```
+
+
+### single assignment 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+
+df_filter <- df %>% filter(!grepl(",", v_call))
+
+
+df_filter[,"start_v"] <-  stringi::stri_locate_first(str = df_filter[,"sequence_alignment"], regex="[ATCG]")[,1]
+
+ggplot(df_filter, aes(start_v)) + stat_ecdf()+
+  scale_x_continuous(breaks = seq(0, max(df_filter[["start_v"]]), by = 10),
+                     labels = seq(0, max(df_filter[["start_v"]]), by = 10)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
+				  	 labels = seq(0, 1, by = 0.1)) +
+  theme(axis.text.x = element_text(size = 12),
+        axis.ticks.x = element_line(size = 2))
+
+```
+
+### by gene 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=70,fig.height=170}
+
+ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
+  stat_ecdf() +
+    scale_x_continuous(breaks = seq(0, max(df_filter[["start_v"]]), by = 10),
+                labels = seq(0, max(df_filter[["start_v"]]), by = 10)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
+				  	 labels = seq(0, 1, by = 0.1)) +
+  theme(axis.text.x = element_text(size = 50),
+        axis.ticks.x = element_line(size = 2),
+        axis.text.y = element_text(size = 50),
+        axis.ticks.y = element_line(size = 2),
+        strip.text = element_text(size = 50)) +
+    facet_wrap(~ v_family, scales = "free", ncol = 1) +
+    theme(legend.position = "bottom",
+            legend.key.size  = unit(2, "cm"),
+            legend.title=element_text(size=50),
+            legend.text =element_text(size=50))
+```
+
+## V identity
+
+### all reads
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+### single assignment 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
+
+# Assuming df is your data frame
+ggplot(df_filter, aes(x = v_identity)) +
+  geom_histogram(binwidth = 0.01, 
+                 fill = "blue", color = "black", alpha = 0.7) +
+  stat_density(geom = "line", color = "red", size = 1) +
+  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
+
+```
+
+
+
+## N count
+
+
+### all reads
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+max_length <- max(nchar(df[,"sequence_alignment"]))
+sequences_padded <- stri_pad_right(df[,"sequence_alignment"], width = max_length, pad = "_")
+sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
+position_counts <- colSums(sequence_chars == "N")
+
+data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
+
+ggplot(data_df, aes(x = Position, y = Count)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(x = "Position in Sequence",
+       y = "Number of Sequences with N",
+       title = "Histogram of Sequences with N at Each Position")
+
+```
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+cat("hist of N_count in each seq - without 0 N", "\n")
+x<-sum(df[,"count_N"]==0)
+cat("There is ",x, " with 0 N","\n")
+
+df_filtered <- df %>%
+filter(count_N > 0)
+
+# Create the bar plot
+ggplot(df_filtered, aes(x = as.factor(count_N))) +
+geom_bar(stat = "count") +
+labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
+
+```
+
+
+### single assignment 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+max_length <- max(nchar(df_filter[,"sequence_alignment"]))
+sequences_padded <- stri_pad_right(df_filter[,"sequence_alignment"], width = max_length, pad = "_")
+sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
+position_counts <- colSums(sequence_chars == "N")
+
+data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
+
+ggplot(data_df, aes(x = Position, y = Count)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  labs(x = "Position in sequence alignment",
+       y = "Number of Sequences with N",
+       title = "N count at Each Position of sequence alignment")
+
+
+```
+
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
+cat("Histogaram of N count in each sequence alignment  - without 0 N", "\n")
+x<-sum(df_filter[,"count_N"]==0)
+cat("There is ",x, " with 0 N","\n")
+
+df_filtered <- df_filter %>%
+filter(count_N > 0)
+ggplot(df_filtered, aes(x = as.factor(count_N))) +
+geom_bar(stat = "count") +
+labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
+
+```
+
+
+## Functionality
+
+### all reads
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
+
+
+library(gridExtra)
+
+df_plot <- data.frame(table(df[,"productive"]))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p1 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("Productive") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+df_plot <- data.frame(table(nchar(df[,"sequence"])%%3 == 0))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p2 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("sequence length divisible by 3") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+df_plot <- data.frame(table(nchar(df[,"junction"])%%3 == 0))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("junction length divisible by 3") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+
+grid.arrange(p1, p2,p3 ,ncol = 3)
+```
+
+### single assignment 
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
+
+library(gridExtra)
+
+df_plot <- data.frame(table(df_filter[,"productive"]))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p1 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("Productive") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+df_plot <- data.frame(table(nchar(df_filter[,"sequence"])%%3 == 0))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p2 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("sequence length divisible by 3") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+df_plot <- data.frame(table(nchar(df_filter[,"junction"])%%3 == 0))
+colnames(df_plot) <- c("productive", "count")
+df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
+
+# Create a ggplot pie chart
+p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  theme_void() +
+  ggtitle("junction length divisible by 3") +
+  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
+            position = position_stack(vjust = 0.5))
+
+
+grid.arrange(p1, p2,p3 ,ncol=3)
+```
+
+## Percentage of alleles for each gene
+
+```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=35,fig.height=150}
+df_filter %>%
+  filter(!grepl(",", v_call)) %>%
+  group_by(v_gene) %>%
+  mutate(n_read = n()) %>%
+  group_by(v_gene, v_call) %>%
+  summarise(n_read=n_read,n_calls = n()) %>%
+  distinct(v_gene, v_call, .keep_all = TRUE) %>%
+  summarise(n_read=n_read,n_calls = n_calls, p_calls = n_calls / n_read * 100) %>%
+  arrange(v_gene, desc(p_calls)) %>%
+  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
+  geom_col() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5,size = 15),
+        axis.ticks.x = element_line(size = 2),
+        axis.text.y = element_text(size = 20),
+        axis.ticks.y = element_line(size = 2),
+        strip.text = element_text(size = 20))+
+  facet_wrap(.~v_gene, ncol = 4, scales = "free")
+  
+```
+
+EOF
+	
+open OUT, ">after_make_db_report_!{name}.rmd";
+print OUT $script;
+close OUT;
+
+'''
+
+}
+
+
+process Third_Alignment_render_after_make_db_report {
+
+input:
+ file rmk from g21_43_rMarkdown0_g21_47
+ set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_47
+ set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_47
+
+output:
+ file "*.html"  into g21_47_outputFileHTML00
+ file "*csv" optional true  into g21_47_csvFile11
+
+"""
+
+#!/usr/bin/env Rscript 
+
+rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
+
+"""
+}
+
+
 process Third_Alignment_Collapse_AIRRseq {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "genotyped_annotated_sequences/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${outfile}+passed.tsv$/) "rearrangements/$filename"}
 input:
  set val(name),file(airrFile) from g21_12_outputFileTSV0_g21_19
 
 output:
- set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_41, g21_19_outputFileTSV0_g21_38, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_48, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g21_50, g21_19_outputFileTSV0_g_37
- set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_41, g21_19_outputFileTSV1_g21_38, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_48, g21_19_outputFileTSV1_g21_49, g21_19_outputFileTSV1_g21_50
+ set val(name), file("${outfile}"+"passed.tsv") optional true  into g21_19_outputFileTSV0_g21_27, g21_19_outputFileTSV0_g21_30, g21_19_outputFileTSV0_g21_49, g21_19_outputFileTSV0_g_37
+ set val(name), file("${outfile}"+"failed*") optional true  into g21_19_outputFileTSV1_g21_27, g21_19_outputFileTSV1_g21_30, g21_19_outputFileTSV1_g21_49
 
 script:
 conscount_min = params.Third_Alignment_Collapse_AIRRseq.conscount_min
 n_max = params.Third_Alignment_Collapse_AIRRseq.n_max
+name_alignment = params.Third_Alignment_Collapse_AIRRseq.name_alignment
 
-outfile = airrFile.toString() - '.tsv' +"_collapsed-"
+
+outfile = airrFile.toString() - '.tsv' + name_alignment + "_collapsed-"
 
 if(airrFile.getName().endsWith(".tsv")){	
 	"""
@@ -4348,8 +4032,8 @@ if(airrFile.getName().endsWith(".tsv")){
 
 process ogrdbstats_report {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbststs_thired_alignment/$filename"}
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbststs_thired_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*pdf$/) "ogrdbstats_third_alignment/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*csv$/) "ogrdbstats_third_alignment/$filename"}
 input:
  set val(name),file(airrFile) from g21_19_outputFileTSV0_g_37
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_37
@@ -4401,14 +4085,14 @@ run_ogrdbstats \
 }
 
 
-process Third_Alignment_alignment_report {
+process Third_Alignment_after_collapse_report {
 
 input:
  set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_30
  set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_30
  set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_30
  set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_30
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_30
+ set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_30
 
 output:
  file "*.rmd"  into g21_30_rMarkdown0_g21_49
@@ -4530,7 +4214,7 @@ print(plot3)
 
 EOF
 	
-open OUT, ">alignment_report_!{name}.rmd";
+open OUT, ">after_collapse_report_!{name}.rmd";
 print OUT $script;
 close OUT;
 
@@ -4539,14 +4223,14 @@ close OUT;
 }
 
 
-process Third_Alignment_render_alignment_report {
+process Third_Alignment_render_after_collapse_report {
 
 input:
  set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_49
  set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_49
  set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_49
  set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_49
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_49
+ set val(name4), file(v_ref) from g_29_germlineFastaFile1_g21_49
  file rmk from g21_30_rMarkdown0_g21_49
 
 output:
@@ -4557,674 +4241,6 @@ output:
 #!/usr/bin/env Rscript 
 
 rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-"""
-}
-
-
-process Third_Alignment_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_38
- set val(name1), file(makeDb_fail) from g21_12_outputFileTSV2_g21_38
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_38
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_38
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_38
-
-output:
- file "*.rmd"  into g21_38_rMarkdown0_g21_50
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_makeDb_fail = makeDb_fail.toString().split(' ')[0]
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(Biostrings)
-
-
-collapse_pass<-read.csv("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.csv("!{readArray_collapse_fail}", sep="\t")
-
-v_ref<-readDNAStringSet("!{v_ref}")
-v_ref<-as.character(v_ref)
-
-threshold_column <- if("consensus_count" %in% names(collapse_fail)) "consensus_count" else "duplicate_count"
-
-threshold_collapse <- max(collapse_fail[[threshold_column]])
-
-
-collapse_db <- rbind(collapse_pass, collapse_fail)
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=15,fig.height=10}
-library(reshape2)
-
-filtered_data <- collapse_db %>% filter(!!sym(threshold_column)>= threshold_collapse, !grepl(",", v_call))
-
-unique_v_calls <- unique(filtered_data[,"v_call"])
-
-# Define a function to perform the comparison and generate plots
-process_v_call <- function(v_call_value) {
-
-  seq_list <- filtered_data[filtered_data[,"v_call"] == v_call_value,][,"sequence_alignment"]
-  ref_seq <- v_ref[v_call_value]
-  comparison_matrix <- matrix(0, nrow = length(seq_list), ncol = nchar(ref_seq))
-  for (i in 1:length(seq_list)) {
-    cut_seq <- substr(seq_list[[i]], 1, nchar(ref_seq))
-    for (j in 1:nchar(ref_seq)) {
-      if(substr(cut_seq, j, j) == "."){
-      	comparison_matrix[i, j] <- 2
-      }else if (substr(ref_seq, j, j) == substr(cut_seq, j, j)) {
-        comparison_matrix[i, j] <- 0
-      } else {
-        comparison_matrix[i, j] <- 1
-      }
-    }
-  }
-  
-  proportion_of_ones <- colMeans(comparison_matrix == 1)
-  entropy_vector <- proportion_of_ones * log2(proportion_of_ones / length(dim(comparison_matrix)[1])) * -1
-  entropy_vector[is.nan(entropy_vector)] <- 0
-  max_index <- which.max(entropy_vector)
-  max_value <- entropy_vector[max_index]
-  data <- data.frame(position = seq_along(entropy_vector), value = entropy_vector)
-
-   
-  entropy_plot<-ggplot(data, aes(x = position, y = value)) +
-  geom_line() +
-  labs(x = "Position",y = "entropy")+
-  theme_minimal()+
-  scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-  scale_y_continuous(breaks = seq(0, max_value, by = 0.1), labels = seq(0,max_value, by = 0.1))
-
-
-  data_melt <- melt(comparison_matrix)
-
-  data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", 
-                              ifelse(data_melt[,"value"] == 1, "blue", "red"))
-
-  #data_melt[,"color"] <- ifelse(data_melt[,"value"] == 0, "white", "blue")
-
-  heatmap_plot <- ggplot(data_melt, aes(x = Var2, y = Var1, fill = factor(value))) +
-    geom_tile() +
-    scale_fill_manual(values =  c("white", "blue","red")) +
-    labs(x = "Position", y = "Sequence") +
-    theme_minimal() +
-    theme(legend.position = "none") +  
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-    
-  blue_counts <- colSums(comparison_matrix == 1)
-  blue_counts_df <- data.frame(Position = 1:length(blue_counts), Count = blue_counts)
-
-  histogram_plot <- ggplot(blue_counts_df, aes(x = Position, y = Count)) +
-    geom_bar(stat = "identity", fill = "blue") +
-    labs(x = "Position", y = "Mismatch Count") +
-    theme_minimal() +
-    scale_x_continuous(breaks = seq(0, nchar(ref_seq), by = 10), labels = seq(0, nchar(ref_seq), by = 10)) +
-    scale_y_continuous(breaks = seq(0, length(seq_list), by = 10), labels = seq(0, length(seq_list), by = 10))
-
-  library(gridExtra)
-  combined_plot <- grid.arrange(histogram_plot, heatmap_plot,entropy_plot, heights = c(3,5,2))
-  invisible(combined_plot)
-}
-
-
-
-for (v_call_value in unique_v_calls) {
-  cat(v_call_value)
-  process_v_call(v_call_value)
-}
-
-```
-
-EOF
-	
-open OUT, ">!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_mutation_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_50
- set val(name2), file(collapse_pass) from g21_19_outputFileTSV0_g21_50
- set val(name3), file(collapse_fail) from g21_19_outputFileTSV1_g21_50
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_50
- file rmk from g21_38_rMarkdown0_g21_50
-
-output:
- file "*.html"  into g21_50_outputFileHTML00
- file "*csv" optional true  into g21_50_csvFile11
-
-"""
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-"""
-}
-
-
-process Third_Alignment_tables_postion_report {
-
-input:
- set val(name), file(collapse_pass) from g21_19_outputFileTSV0_g21_41
- set val(name1), file(collapse_fail) from g21_19_outputFileTSV1_g21_41
-
-output:
- file "*.rmd"  into g21_41_rMarkdown0_g21_48
-
-shell:
-
-
-readArray_collapse_pass = collapse_pass.toString().split(' ')[0]
-readArray_collapse_fail = collapse_fail.toString().split(' ')[0]
-
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-install.packages("vegan")
-library(seqinr)
-library(vegan)
-library(dplyr)
-library(ggplot2)
-library(alakazam)
-library(knitr)
-
-
-
-collapse_pass<-read.delim("!{readArray_collapse_pass}", sep="\t")
-collapse_fail<-read.delim("!{readArray_collapse_fail}", sep="\t")
-
-datadf <- rbind(collapse_pass, collapse_fail)
-datadf[,"v_gene"] <- getGene(datadf[,"v_call"])
-
-```
-
-```{r echo=FALSE,message = FALSE,fig.width=10,fig.height=8}
-positionInfo <- function(data, v_gene, verbose=TRUE){
-    info <- list()
-    if(verbose){cat(paste0("Analyzing positions for V gene: ",v_gene,"\n"))}
-    for (i in 1:(nchar(as.character(data[1,"sequence_alignment"])))){
-        ss <- substr(data[,"sequence_alignment"],i,i)
-        ss <- toupper(ss)
-        df <- data.frame(base=unique(ss))
-        tmp <- c()
-        for ( j in 1:length(unique(ss))){
-            tmp[j] <- length(grep(df[j,1], ss))
-        }
-        df[,"rep"] <- tmp
-        rownames(df) <- as.character(df[,1])
-        df[,1] <- NULL
-        dff <- subset(df, rownames(df)!="-")
-        
-        info[[i]] <- list(
-            shan = vegan::diversity(t(df)),                                    # Shannon entropy of position
-            shanc = ifelse(nrow(dff)==0, NA, vegan::diversity(t(dff))),        # Shannon entropy of position removing gaps ("-")
-            rich = length(unique(ss)),                                  # Position richness
-            richc = ifelse(nrow(dff)==0, NA, length(rownames(dff))),    # Position richness removing gaps ("-")
-            uniq = paste(unique(ss), collapse = "|"),                                    # Unique bases in position
-            repe = paste(tmp, collapse = "|")                                           # Repetitions of the unique bases in position
-        )
-        if(verbose){
-            if((i %% (round(nchar(as.character(data[1,"sequence_alignment"]))*0.1,0))) == 0){message("  ", round(i/nchar(as.character(data[1,"sequence_alignment"]))*100, 0), "%")}
-        }
-    }
-
-    if(verbose){cat("Creating the data frame with the information \n")}
-
-    df <- data.frame(v_gene = v_gene,
-                     posi=c(1:length(info)),
-                     shan=sapply(info, `[[`, "shan"),
-                     shanc=sapply(info, `[[`, "shanc"),
-                     rich=sapply(info, `[[`, "rich"),
-                     richc=sapply(info, `[[`, "richc"),
-                     uniq=sapply(info, `[[`, "uniq"),
-                     repe=sapply(info, `[[`, "repe"))
-    
-    if(verbose){cat("Finished \n")}
-    return(df)
-}
-
-```
-
-
-```{r echo=FALSE,message = FALSE,results='asis',fig.width=10,fig.height=8}
-replace_dots <- function(x) {
-  chartr(".", "-", x)
-}
-df <- data.frame(lapply(datadf, replace_dots))
-
-filtered_data <- df %>% filter(!grepl(",", v_call))
-
-info <- lapply(unique(filtered_data[,"v_call"]), function(g){
- cat("\n\n", "*************************", "\n")
- x <- positionInfo( filtered_data[filtered_data[,"v_call"] == g,],g)
- print(knitr::kable(x))
- cat("\n\n", "*************************", "\n")
-})
-
-```
-
-EOF
-	
-open OUT, ">tables_postion_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_tables_postion_report {
-
-input:
- file rmk from g21_41_rMarkdown0_g21_48
- set val(name1), file(collaps_pass) from g21_19_outputFileTSV0_g21_48
- set val(name1), file(collaps_fail) from g21_19_outputFileTSV1_g21_48
-
-output:
- file "*.html"  into g21_48_outputFileHTML00
- file "*csv" optional true  into g21_48_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
-"""
-}
-
-
-process Third_Alignment_start_postion_report {
-
-input:
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_43
- set val(name2), file(v_ref) from g_2_germlineFastaFile_g21_43
-
-output:
- file "*.rmd"  into g21_43_rMarkdown0_g21_47
-
-shell:
-
-readArray_makeDb_pass = makeDb_pass.toString().split(' ')[0]
-readArray_v_ref = v_ref.toString().split(' ')[0]
-
-'''
-#!/usr/bin/env perl
-
-
-my $script = <<'EOF';
-
-
-```{r echo=FALSE,message = FALSE}
-library(ggplot2)
-library(rlang)
-library(alakazam)
-library(dplyr)
-library(stringi)
-
-
-df <-read.delim("!{readArray_makeDb_pass}", sep="\t")
-
-df[["v_gene"]] <- getGene(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-df[["v_family"]] <- getFamily(df[["v_call"]], first = F, collapse = TRUE, strip_d = FALSE)
-
-df_filter <- df %>% filter(!grepl(",", v_call))
-
-
-df[,"start_v"] <- stringi::stri_locate_first(str = df[,"sequence_alignment"], regex="[ATCG]")[,1]
-df_filter[,"start_v"] <-  stringi::stri_locate_first(str = df_filter[,"sequence_alignment"], regex="[ATCG]")[,1]
-
-df[,"count_N"] <- stringi::stri_count_fixed(str = df[,"sequence_alignment"],"N")
-df_filter[,"count_N"] <- stringi::stri_count_fixed(str = df_filter[,"sequence_alignment"],"N")
-
-
-```
-
-
-
-### all redas
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-
-df[,"start_v"] <- stringi::stri_locate_first(str = df[,"sequence_alignment"], regex="[ATCG]")[,1]
-
-ggplot(df, aes(start_v)) + stat_ecdf() +
-  scale_x_continuous(breaks = seq(0, max(df[["start_v"]]), by = 10),
-                     labels = seq(0, max(df[["start_v"]]), by = 10)) +
-  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
-					labels = seq(0, 1, by = 0.1)) +
-  theme(axis.text.x = element_text(size = 12),
-        axis.ticks.x = element_line(size = 2),
-        axis.ticks.y = element_line(size = 2))
-
-```
-
-
-### single asigmant 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-
-df_filter <- df %>% filter(!grepl(",", v_call))
-
-
-df_filter[,"start_v"] <-  stringi::stri_locate_first(str = df_filter[,"sequence_alignment"], regex="[ATCG]")[,1]
-
-ggplot(df_filter, aes(start_v)) + stat_ecdf()+
-  scale_x_continuous(breaks = seq(0, max(df_filter[["start_v"]]), by = 10),
-                     labels = seq(0, max(df_filter[["start_v"]]), by = 10)) +
-  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
-				  	 labels = seq(0, 1, by = 0.1)) +
-  theme(axis.text.x = element_text(size = 12),
-        axis.ticks.x = element_line(size = 2))
-
-```
-
-### by gene 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=70,fig.height=170}
-
-ggplot(df_filter, aes(start_v, colour = as.factor(v_gene))) +
-  stat_ecdf() +
-    scale_x_continuous(breaks = seq(0, max(df_filter[["start_v"]]), by = 10),
-                labels = seq(0, max(df_filter[["start_v"]]), by = 10)) +
-  scale_y_continuous(breaks = seq(0, 1, by = 0.1),
-				  	 labels = seq(0, 1, by = 0.1)) +
-  theme(axis.text.x = element_text(size = 50),
-        axis.ticks.x = element_line(size = 2),
-        axis.text.y = element_text(size = 50),
-        axis.ticks.y = element_line(size = 2),
-        strip.text = element_text(size = 50)) +
-    facet_wrap(~ v_family, scales = "free", ncol = 1) +
-    theme(legend.position = "bottom",
-            legend.key.size  = unit(2, "cm"),
-            legend.title=element_text(size=50),
-            legend.text =element_text(size=50))
-```
-
-## V identity
-
-### all redas
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
-
-# Assuming df is your data frame
-ggplot(df, aes(x = v_identity)) +
-  geom_histogram(binwidth = 0.01, 
-                 fill = "blue", color = "black", alpha = 0.7) +
-  stat_density(geom = "line", color = "red", size = 1) +
-  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
-
-```
-
-### single asigmant 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=8}
-
-# Assuming df is your data frame
-ggplot(df_filter, aes(x = v_identity)) +
-  geom_histogram(binwidth = 0.01, 
-                 fill = "blue", color = "black", alpha = 0.7) +
-  stat_density(geom = "line", color = "red", size = 1) +
-  labs(title = "Histogram with Density Line of v_identity", x = "v_identity", y = "Frequency")
-
-```
-
-
-
-## N count
-
-
-### all redas
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df[,"sequence_alignment"]))
-sequences_padded <- stri_pad_right(df[,"sequence_alignment"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in Sequence",
-       y = "Number of Sequences with N",
-       title = "Histogram of Sequences with N at Each Position")
-
-```
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-cat("hist of N_count in each seq - without 0 N", "\n")
-x<-sum(df[,"count_N"]==0)
-cat("There is ",x, " with 0 N","\n")
-
-df_filtered <- df %>%
-filter(count_N > 0)
-
-# Create the bar plot
-ggplot(df_filtered, aes(x = as.factor(count_N))) +
-geom_bar(stat = "count") +
-labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
-
-```
-
-
-### single asigmant 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-max_length <- max(nchar(df_filter[,"sequence_alignment"]))
-sequences_padded <- stri_pad_right(df_filter[,"sequence_alignment"], width = max_length, pad = "_")
-sequence_chars <- stri_split_regex(sequences_padded, "(?!^)(?=.{1})", simplify = TRUE)
-position_counts <- colSums(sequence_chars == "N")
-
-data_df <- data.frame(Position = 1:length(position_counts), Count = position_counts)
-
-ggplot(data_df, aes(x = Position, y = Count)) +
-  geom_bar(stat = "identity", fill = "blue") +
-  labs(x = "Position in sequence alignment",
-       y = "Number of Sequences with N",
-       title = "N count at Each Position of sequence alignment")
-
-
-```
-
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=15,fig.height=10}
-cat("Histogaram of N count in each sequence alignment  - without 0 N", "\n")
-x<-sum(df_filter[,"count_N"]==0)
-cat("There is ",x, " with 0 N","\n")
-
-df_filtered <- df_filter %>%
-filter(count_N > 0)
-ggplot(df_filtered, aes(x = as.factor(count_N))) +
-geom_bar(stat = "count") +
-labs(title = "Bar Plot for Each Value", x = "Value", y = "Count")
-
-```
-
-
-## Functionality
-
-### all redas
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
-
-
-library(gridExtra)
-
-df_plot <- data.frame(table(df[,"productive"]))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p1 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("Productive") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-df_plot <- data.frame(table(nchar(df[,"sequence"])%%3 == 0))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p2 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("sequence length divisible by 3") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-df_plot <- data.frame(table(nchar(df[,"junction"])%%3 == 0))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("junction length divisible by 3") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-
-grid.arrange(p1, p2,p3 ,ncol = 3)
-```
-
-### single asigmant 
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=10,fig.height=7}
-
-library(gridExtra)
-
-df_plot <- data.frame(table(df_filter[,"productive"]))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p1 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("Productive") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-df_plot <- data.frame(table(nchar(df_filter[,"sequence"])%%3 == 0))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p2 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("sequence length divisible by 3") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-df_plot <- data.frame(table(nchar(df_filter[,"junction"])%%3 == 0))
-colnames(df_plot) <- c("productive", "count")
-df_plot[,"percentage"] <- df_plot[,"count"] / sum(df_plot[,"count"]) * 100
-
-# Create a ggplot pie chart
-p3 <- ggplot(df_plot, aes(x = "", y = percentage, fill = productive)) +
-  geom_bar(stat = "identity", width = 1, color = "white") +
-  coord_polar(theta = "y") +
-  theme_void() +
-  ggtitle("junction length divisible by 3") +
-  geom_text(aes(label = sprintf("%s\n%.1f%%", productive, percentage)),
-            position = position_stack(vjust = 0.5))
-
-
-grid.arrange(p1, p2,p3 ,ncol=3)
-```
-
-## Percentage of alleles for each gene
-
-```{r echo=FALSE,message = FALSE,warnings =FALSE,fig.width=35,fig.height=150}
-df_filter %>%
-  filter(!grepl(",", v_call)) %>%
-  group_by(v_gene) %>%
-  mutate(n_read = n()) %>%
-  group_by(v_gene, v_call) %>%
-  summarise(n_read=n_read,n_calls = n()) %>%
-  distinct(v_gene, v_call, .keep_all = TRUE) %>%
-  summarise(n_read=n_read,n_calls = n_calls, p_calls = n_calls / n_read * 100) %>%
-  arrange(v_gene, desc(p_calls)) %>%
-  ggplot(aes(x = reorder(v_call, p_calls), y = p_calls)) + # Modified aes() function
-  geom_col() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 0.5,size = 15),
-        axis.ticks.x = element_line(size = 2),
-        axis.text.y = element_text(size = 30),
-        axis.ticks.y = element_line(size = 2),
-        strip.text = element_text(size = 30))+
-  facet_wrap(.~v_gene, ncol = 3, scales = "free")
-  
-```
-
-EOF
-	
-open OUT, ">start_postion_report_!{name}.rmd";
-print OUT $script;
-close OUT;
-
-'''
-
-}
-
-
-process Third_Alignment_render_start_postion_report {
-
-input:
- file rmk from g21_43_rMarkdown0_g21_47
- set val(name4), file(v_ref) from g_2_germlineFastaFile_g21_47
- set val(name), file(makeDb_pass) from g21_12_outputFileTSV0_g21_47
-
-output:
- file "*.html"  into g21_47_outputFileHTML00
- file "*csv" optional true  into g21_47_csvFile11
-
-"""
-
-#!/usr/bin/env Rscript 
-
-rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_dir=".")
-
 """
 }
 
@@ -5310,8 +4326,8 @@ readArray_second_igblast = try_second_igblast.toString().split(' ')
 #!/usr/bin/env Rscript 
 
 x1<-"${readArray_first_igblast[0]}"
-x2<-"${readArray_clone[0]}"
-x3<-"${readArray_second_igblast[0]}"
+x2<-"${readArray_second_igblast[0]}"
+x3<-"${readArray_clone[0]}"
 x4<-"${readArray_third_igblast[0]}"
 
 file_names <- c(x1, x2, x3,x4)
@@ -5322,9 +4338,34 @@ content <- sapply(file_names, function(file) {
 writeLines(unlist(content), con = output_file)
 
 library(prestor)
+library(dplyr)
 
 console_log <- loadConsoleLog("output.txt")
-count_df <- plotConsoleLog(console_log, sizing="figure")
+
+log_df <- console_log
+pass=c("PASS", "UNIQUE")
+fail=c("FAIL", "DUPLICATE", "UNDETERMINED")
+
+# Get passed entries
+pass_df <- log_df %>%
+    filter(!!rlang::sym("field") %in% pass) %>%
+    mutate_at("value", as.numeric) %>%
+    group_by(!!!rlang::syms(c("step", "task"))) %>%
+    dplyr::summarize(pass=sum(!!rlang::sym("value")))
+
+# Get failed entries
+fail_df <- log_df %>%
+    filter(!!rlang::sym("field") %in% fail) %>%
+    mutate_at("value", as.numeric) %>%
+    group_by(!!!rlang::syms(c("step", "task"))) %>%
+    summarize(fail=sum(!!rlang::sym("value")))
+
+# Merge passed and failed counts
+count_df <- inner_join(pass_df, fail_df, by=c("step", "task")) %>%
+    rowwise() %>%
+    dplyr::mutate(total=!!rlang::sym("pass") + !!rlang::sym("fail"),
+                  fraction=!!rlang::sym("pass") / !!rlang::sym("total"))
+
 
 df<-count_df[,c("task", "pass", "fail")]
 
