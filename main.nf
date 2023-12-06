@@ -201,7 +201,7 @@ Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseNam
 g_38_outputFileTxt_g0_9 = file(params.auxiliary_data, type: 'any')
 g_38_outputFileTxt_g11_9 = file(params.auxiliary_data, type: 'any')
 g_38_outputFileTxt_g21_9 = file(params.auxiliary_data, type: 'any')
-Channel.fromPath(params.airr_seq, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_44_fastaFile_g0_12;g_44_fastaFile_g0_9;g_44_fastaFile_g11_12;g_44_fastaFile_g11_9;g_44_fastaFile_g21_12;g_44_fastaFile_g21_9}
+Channel.fromPath(params.airr_seq, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_44_fastaFile_g_73;g_44_fastaFile_g0_12;g_44_fastaFile_g0_9;g_44_fastaFile_g11_12;g_44_fastaFile_g11_9;g_44_fastaFile_g21_12;g_44_fastaFile_g21_9}
 g_69_logFile_g_63 = file(params.fake_igblast_log, type: 'any')
 
 
@@ -4385,8 +4385,8 @@ readArray_first_igblast = first_igblast.toString().split(' ')
 readArray_third_igblast = third_igblast.toString().split(' ')
 readArray_clone = clone.toString().split(' ')
 
-try_second_igblast = second_igblast.endsWith("txt") ? second_igblast : fake
-
+r_second_igblast = second_igblast.toString().split(' ')[0]
+try_second_igblast = r_second_igblast.endsWith(".txt") ? second_igblast : fake
 readArray_second_igblast = try_second_igblast.toString().split(' ')
 
 
@@ -4438,6 +4438,62 @@ count_df <- inner_join(pass_df, fail_df, by=c("step", "task")) %>%
 df<-count_df[,c("task", "pass", "fail")]
 
 write.csv(df,"pipeline_statistics.csv") 
+
+"""
+}
+
+
+process new_meta_fata {
+
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*json$/) "meta_data/$filename"}
+input:
+ set val(name), file(files) from g_44_fastaFile_g_73
+
+output:
+ file "*json"  into g_73_outputFile00
+
+
+"""
+#!/usr/bin/env Rscript
+
+if (!requireNamespace("jsonlite", quietly = TRUE)) {
+  install.packages("jsonlite")
+}
+library(jsonlite)
+
+# Create a list representing the JSON structure
+json_data <- list(
+  sample = list(
+    data_processing = list(
+      annotation = list(
+        aligner = list(
+          tool = "IgBLAST",
+          version = "1.17.0"
+        ),
+        aligner_reference = list(
+          aligner_reference_v = "GLDB_macaque_asc_ref - version  2023-10-29",
+          aligner_reference_d = "GLDB_macaque_asc_ref - version  2023-10-29",
+          aligner_reference_j = "GLDB_macaque_asc_ref - version  2023-10-29"
+        ),
+        Genotyper = list(
+          Tool = "TIgGER",
+          Version = "1.0.0"
+        ),
+        Haplotyper = list(
+          Tool = "RAbHIT",
+          Version = "0.2.0"
+        ),
+        `Single Assignment` = "true"
+      )
+    )
+  )
+)
+
+# Convert the list to JSON format
+json_string <- toJSON(json_data, pretty = TRUE)
+
+# Write the JSON string to a file
+writeLines(json_string, "annotation_metadata.json")
 
 """
 }
