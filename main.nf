@@ -564,7 +564,7 @@ script:
 readArray_v_ref = v_ref.toString().split(' ')[0]
 
 """
-#!/usr/bin/env python 
+#!/usr/bin/env python3 
 
 import pandas as pd
 from Bio.Seq import Seq
